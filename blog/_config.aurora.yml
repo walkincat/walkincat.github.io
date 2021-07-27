@@ -1,0 +1,174 @@
+site:
+  subtitle: WalkinCat
+  author: WalkinCat
+  nick: walking around with the cat
+  description: 專注於區塊鏈產業的社群，提供投資人區塊鏈項目、NFT、技術、交易討論。
+  link: '/'
+  language: en
+  multi_language: false
+  logo: /img/logo.png
+  avatar: /img/logo.png
+  beian:
+    number: ''
+    link: ''
+  police_beian:
+    number: ''
+    link: ''
+
+#! ---------------------------------------------------------------
+#! Authors Configs
+#！ @docs https://aurora.tridiamond.tech/guide/authors.html
+#! ---------------------------------------------------------------
+authors:
+  ##! example
+  # Panda:
+  #   name: Panda
+  #   avatar: https://up.enterdesk.com/edpic_source/44/ff/3d/44ff3d6bd2819d524facfcc33205d4cd.jpg
+  #   link: https://github.com/TriDiamond
+  #   description: 'Think like an artist, code like an artisan.'  
+  #   socials:
+  #     github: https://tridiamond.tech
+
+  # author-2:
+  #   name: Jerry
+  #   avatar: https://Jerry.png
+  #   link: https://github.com/TriDiamond
+  #   description: 'I am Jerry, how are you?'
+  #   socials:
+  #     github: https://github.com/Jerry
+
+#! ---------------------------------------------------------------
+#! Menu Configs
+#！ @docs https://aurora.tridiamond.tech/guide/menu.html
+#! ---------------------------------------------------------------
+menu:
+  About: true
+  Tags: true
+  Archives: true
+  Email:
+    name: 'Mail'
+    path: 'mailto:walkincat2020@gmail.com'
+  # Custom Menus
+  # message-board:
+  #   name: 'MessageBoard'
+  #   i18n:
+  #     cn: '留言板'
+  #     en: 'Message Board'
+  #   path: '/page/message-board'
+
+
+#! ---------------------------------------------------------------
+#! Theme Config
+#! @docs https://aurora.tridiamond.tech/guide/theme.html
+#! ---------------------------------------------------------------
+theme:
+  dark_mode: true
+  profile_shape: diamond # support `circle`, `diamond`, `rounded`
+  feature: true
+  gradient:
+    color_1: '#8A6DCB' 
+    color_2: '#B639F5' 
+    color_3: '#28D0AC' 
+
+#! ---------------------------------------------------------------
+#! Social Configs
+#! @docs https://aurora.tridiamond.tech/guide/social.html
+#! ---------------------------------------------------------------
+socials: #社群媒體
+  customs:
+    Facebook: 
+      icon: /img/facebook.png
+      link: https://bit.ly/3xMmPMd
+
+    Instagram:
+      icon: /img/instagram.png
+      link: https://bit.ly/2TgZ6ou
+    
+    Twitter:
+      icon: /img/twitter.png
+      link: https://bit.ly/3rhwqZ8
+
+    Telegram:
+      icon: /img/telegram.png
+      link: https://bit.ly/3evFep3
+
+    WalkinCat:
+      icon: /img/logo.png
+      link: https://bit.ly/3Bh45Xi
+
+#! ---------------------------------------------------------------
+#! Site Meta Configs
+#! @docs https://aurora.tridiamond.tech/guide/theme.html
+#! ---------------------------------------------------------------
+site_meta:
+  cdn: en
+  favicon: /img/logo.png
+  description: 'WalkinCat 成立於 2020 年末，是一個專注於開拓區塊鏈發展性的社群。'
+  keywords: '區塊鏈, NFT, 社群, 加密貨幣 ,虛擬貨幣 , 比特幣交易, Trading, Crypto'
+  author: 'WalkinCat'
+
+#! ---------------------------------------------------------------
+#! Plugins
+#! @docs https://aurora.tridiamond.tech/guide/plugins.html
+#! ---------------------------------------------------------------
+
+# For local development only!
+gitalk:
+  enable: true
+  autoExpand: false
+  clientID: ''
+  clientSecret: ''
+  repo: ''
+  owner: ''
+  admin: ['']
+  id: uid
+  language: en
+  distractionFreeMode: false
+  recentComment: false
+  proxy: ''
+
+# Valine comment plugin (recommended!)
+# see https://valine.js.org/quickstart.html
+valine:
+  enable: false
+  app_id:
+  app_key:
+  avatar: ''
+  placeholder: Leave your thoughts behind~
+  visitor: false
+  lang: en
+  avatarForce: false
+  meta: ['nick', 'mail']
+  requiredFields: []
+  admin: 'walkincat'
+  recentComment: true
+
+# Enable Busuanzi statistic plugin
+# see http://ibruce.info/2015/04/04/busuanzi/
+busuanzi:
+  enable: true
+
+copy_protection:
+  enable: true
+  author:
+    en: Author
+  link:
+    en: Article is from
+
+#! ---------------------------------------------------------------
+#! Enable Aurora Bot Dia
+#! @docs https://aurora.tridiamond.tech/guide/site-meta.html#custom-meta
+#! ---------------------------------------------------------------
+# aurora_bot:
+#   enable: false
+#   locale: en
+#   bot_type: dia
+#   tips:
+
+#! ---------------------------------------------------------------
+#! Injections
+#! @docs https://aurora.tridiamond.tech/guide/site-meta.html#custom-meta
+#! ---------------------------------------------------------------
+# injects:
+#   scripts:
+#   css:
