@@ -3,10 +3,10 @@ title: 空投分享 | WalkinCat 上線啦 - IG、FB 按讚留言分享抽好禮�
 date: 2021-07-20 12:00:00
 cover: /img/logo.png
 tags:
-    - airdrop
-    - walkincat
+    - Airdrop
+    - WalkinCat
 categories:
-    - airdrop
+    - 空投
 feature: true
 ---
 
@@ -38,6 +38,8 @@ feature: true
 ｜Step 3. 限時動態分享並標記 @WalkinCat2020
 ---
 # WalkinCat
+各位讀者們大家好，這裡是 WalkinCat 一個熱愛分享區塊鏈知識以及分享套利/保本投資經驗的社群，希望可以在未來的時間分享更多有趣的產品及使用心得。
+
 - [加入 TG 大家族](https://t.me/walkincat)
 - [加入 WalinCat 頻道](https://t.me/walkincat2020)
 - [加入 Instagram 獲取第一手資訊](https://bit.ly/2TgZ6ou)

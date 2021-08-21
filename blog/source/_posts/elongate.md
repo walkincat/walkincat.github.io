@@ -1,11 +1,10 @@
 ---
-title: WalkinCat 工商文章分享 | ELONGATE - 目標打造一個具有社會影響力的生態系統
+title: 工商文章 | ELONGATE - 目標打造一個具有社會影響力的生態系統
 date: 2021-07-23 10:00:00
 cover: /img/2021-07-23-elongate/cover.png
 tags:
-    - elongate
+    - Elongate
 categories:
-    - bsc
     - 工商文章
 feature: true
 ---
@@ -107,6 +106,8 @@ ELONGATE 的周邊也將 80% 的的利潤用於他們的慈善計畫。
 
 ---
 # WalkinCat
+各位讀者們大家好，這裡是 WalkinCat 一個熱愛分享區塊鏈知識以及分享套利/保本投資經驗的社群，希望可以在未來的時間分享更多有趣的產品及使用心得。
+
 - [加入 TG 大家族](https://t.me/walkincat)
 - [加入 WalinCat 頻道](https://t.me/walkincat2020)
 - [加入 Instagram 獲取第一手資訊](https://bit.ly/2TgZ6ou)

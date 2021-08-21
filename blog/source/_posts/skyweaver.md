@@ -4,7 +4,7 @@ date: 2021-07-25 12:00:00
 cover: /img/2021-07-25-skyweaver/1.png
 tags:
     - 區塊鏈
-    - blockcahin
+    - Blockchain
     - NFT
     - GameFi
 categories:
@@ -80,7 +80,7 @@ A：「是，中心化遊戲的卡牌本來就不可能被帶走，除非你去�
 
 ### 階級 Rank
 
-> 每贏一場加 2分。學者前 20 分生階、學者之後 24分、預言家 28 分並且學者後會開始倒扣，GrandWeaver 為全服前 25 名。
+> 每贏一場加 2分。學者前 20 分升階、學者之後 24分、預言家 28 分並且學者後會開始倒扣，GrandWeaver 為全服前 25 名。
 
 - 流浪者 Wanderer
 - 新兵 Apprentice
@@ -161,6 +161,8 @@ A：「是，中心化遊戲的卡牌本來就不可能被帶走，除非你去�
 
 ---
 # WalkinCat
+各位讀者們大家好，這裡是 WalkinCat 一個熱愛分享區塊鏈知識以及分享套利/保本投資經驗的社群，希望可以在未來的時間分享更多有趣的產品及使用心得。
+
 - [加入 TG 大家族](https://t.me/walkincat)
 - [加入 WalinCat 頻道](https://t.me/walkincat2020)
 - [加入 Instagram 獲取第一手資訊](https://bit.ly/2TgZ6ou)

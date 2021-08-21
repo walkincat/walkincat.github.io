@@ -1,11 +1,11 @@
 ---
-title: 科普知識 | 搬磚乾貨 2 of 3:在熊市中也能獲利 30~40% APY 的套利方法
+title: 合作分享 | 搬磚乾貨 2 of 3:在熊市中也能獲利 30~40% APY 的套利方法
 date: 2021-07-23 12:00:00
 cover: /img/2021-07-27-bitgin-move-brick2/三角套利-簡易概念.png
 tags:
     - 合作分享
     - 法幣交易所
-    - bitgin
+    - Bitgin
     - 搬磚
 categories:
     - 搬磚
@@ -76,6 +76,8 @@ USDT 市場上也有個特性，在比特幣、以太幣等主流幣領跌時，
 
 ---
 # WalkinCat
+各位讀者們大家好，這裡是 WalkinCat 一個熱愛分享區塊鏈知識以及分享套利/保本投資經驗的社群，希望可以在未來的時間分享更多有趣的產品及使用心得。
+
 - [加入 TG 大家族](https://t.me/walkincat)
 - [加入 WalinCat 頻道](https://t.me/walkincat2020)
 - [加入 Instagram 獲取第一手資訊](https://bit.ly/2TgZ6ou)

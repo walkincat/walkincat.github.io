@@ -4,11 +4,11 @@ date: 2021-07-20 08:00:00
 cover: /img/2021-07-20-what-is-blockchain/what-is-blockchain.png
 tags:
     - 區塊鏈
-    - blockcahin
-    - bitcoin
-    - knowledge
+    - Blockchain
+    - Bitcoin
+    - 科普
 categories:
-    - 區塊鏈
+    - 科普
 # feature: true
 ---
 > 看到區塊鏈在各個產業不斷受到重視，所以也就萌生了來寫區塊鏈教學的這個想法，希望可以透過更簡單更白話的方式讓大家了解區塊鏈也能根據了解的程度去防止被更多的不法人士拐騙。
@@ -112,11 +112,10 @@ categories:
 - [中本聰論文白皮書譯本](http://satoshinakamoto.me/zh-tw/bitcoin.pdf)
 ---
 # WalkinCat
-社群合作、活動｜原創文章｜交易經驗分享，可透過以下連結找到我們！
-- Email: walkincat2020@gmail.com
+各位讀者們大家好，這裡是 WalkinCat 一個熱愛分享區塊鏈知識以及分享套利/保本投資經驗的社群，希望可以在未來的時間分享更多有趣的產品及使用心得。
+
 - [加入 TG 大家族](https://t.me/walkincat)
 - [加入 WalinCat 頻道](https://t.me/walkincat2020)
 - [加入 Instagram 獲取第一手資訊](https://bit.ly/2TgZ6ou)
 - [加入 Facebook 獲取第一手資訊](https://bit.ly/3xMmPMd)
 - [更多相關連結](https://linktr.ee/walkincat)
-

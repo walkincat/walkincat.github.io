@@ -114,7 +114,7 @@ site_meta:
 
 # For local development only!
 gitalk:
-  enable: true
+  enable: false
   autoExpand: false
   clientID: ''
   clientSecret: ''
@@ -130,7 +130,7 @@ gitalk:
 # Valine comment plugin (recommended!)
 # see https://valine.js.org/quickstart.html
 valine:
-  enable: false
+  enable: true
   app_id:
   app_key:
   avatar: ''
