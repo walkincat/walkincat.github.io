@@ -60,7 +60,7 @@ CoinMarketCap 上可以對比主流幣對的 Liquidity Score （流動性得分�
 > CoinMarketCap Liquidity Score 「流動性得分」：根據不同的訂單規模產生的滑點，對交易幣對的流動性進行從 0 到 1000 的評分。分數越高，表明市場流動性越強。
 
 ## 小結
-筆者身為一個右側交易的交易員，認為 WOO X 將作為超新星衝擊現有的交易所市場，當前只要質押 1800 顆 $WOO（依照 8/21 的價格，約為 ___ USD）即可以享受交易 0 手續費的福利搭配低滑點也更適合右側交易的交易員；若讀者為 API 交易員也可以享受以下福利（具體可以看下圖手續費的比例）。有任何問題都歡迎加入「 WOO Network 社群」，一同來了解 WOO Network 並祝各位交易愉快！
+筆者身為一個右側交易的交易員，認為 WOO X 將作為超新星衝擊現有的交易所市場，當前只要質押 1800 顆 $WOO（依照 8/21 的價格，約為 1386 USD）即可以享受交易 0 手續費的福利搭配低滑點也更適合右側交易的交易員；若讀者為 API 交易員也可以享受以下福利（具體可以看下圖手續費的比例）。有任何問題都歡迎加入「 WOO Network 社群」，一同來了解 WOO Network 並祝各位交易愉快！
 
 <img src="/img/2021-08-21-woox/fee.png">
 
@@ -72,12 +72,13 @@ CoinMarketCap 上可以對比主流幣對的 Liquidity Score （流動性得分�
 
 如果想要更了解 WOO NetWork，可以透過下方連結來進一步獲取資訊！
 
-- WOO X：https://x.woo.network/
-- Telegram：https://t.me/WootradeTaiwan
-- Medium（英文）：https://wootrade.medium.com/
-- Medium（中文）：https://medium.com/@wootradetw
-- Discord：discord.gg/wootrade
-- Twitter：https://twitter.com/wootraders
+- Reddit: https://www.reddit.com/r/WOO_X
+- Website: https://woo.org
+- Twitter: https://twitter.com/WOOnetwork
+- Discord: https://discord.gg/woonetwork
+- Telegram: https://t.me/woonetwork
+- Telegram Announcements: https://t.me/-woonetworkann
+- Medium: https://medium.com/woonetwork
 
 ---
 # WalkinCat
