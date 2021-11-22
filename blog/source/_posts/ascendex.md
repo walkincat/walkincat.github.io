@@ -1,6 +1,6 @@
 ---
-title: 從 AscendEX 上線項目來找尋項目熱點
-date: 2021-09:02 09:00:00
+title: 爆火的 Solana 與 NFT 項目如何選? AscendEX 熱門項目指南
+date: 2021-09-14 09:00:00
 cover: /img/2021-09-01-ascendex/logo.jpeg
 tags:
     - Exchange
@@ -14,6 +14,11 @@ feature: true
 [Solana 上的可能性與未來](https://walkincat.org/post/solana-future)，當時我們討論了 Solana 的可能性與未來發展，而 Solana 也不負眾望，用了不到一個月的時間就突破歷史新高! 創造了一個月五倍的佳績。
 
 <img src="/img/2021-09-01-ascendex/1.png">
+
+接下來我們也在 [什麼是 NFT ?](https://walkincat.org/post/what-is-nft) 的文章中簡單的解釋了甚麼是 NFT 與他的運作原理，這次我們與 AscendEX 一起合作，在 AscendEX 上找尋熱門 Solana 與 NFT 生態系代幣。
+
+<img src="/img/2021-09-01-ascendex/logo.jpeg">
+
 
 ## Solana項目介紹
 
@@ -30,7 +35,7 @@ Oxygen 是一個建立在 Solana 上的 DeFi 服務商，由 Serum 的鏈上基�
 
 ### Bonfida（FIDA）
 
-Oxygen 是一個建立在 Solana 上的 DeFi 服務商，由 Serum 的鏈上基礎設施提供支持。Oxygen是圍繞著資金池子 (pools) 而建立的。從借貸設施開始，用戶將能夠賺取收益，並獲得針對其投資組合的杠桿，為一個充滿活力的、去中心化的金融生態系統奠定基礎。該項目於 2020 年底隨著其主網 alpha 的發布而啟動。Oxygen 總部設在瑞士，核心團隊由熱衷於建設未來金融基礎設施的人組成。他們共同擁有數十年的金融技術經驗，有 15 名開發人員分布在世界各地。Oxygen 的目標是將我們目前的金融模式轉變為一個比以往想象的更容易獲得、更公平、更強大的模式。Oxygen 的第一階段是通過一個基於資金池的基礎設施進行借貸。我們接下來計劃創建波動性交易協議和結構性產品功能，以便開發者可以創建自己的結構性產品。我們的最終願景是重新創建投資銀行內存在的類似於市場的業務單元，並讓每個人都能使用它們。
+Bonfida 在 Serum、Solana 和用戶之間架起了橋梁。它是 Serum 的 GUI，並將 Solana 數據分析帶到了現場。Bonfida API 被該領域一些最大的做市商所使用，並且每周的請求量增長了 25%。Bonfida 上 95% 的凈費用將由 FIDA 代幣來管理，並且可用於購買/燒毀等。FIDA 將在交易上用於訪問 VIP 的 API 、Bonfida 上的機器人、Bonfida DEX 和 Solible 上市的做市服務、咨詢服務與基於 FIDA 代幣的治理等等相關的一些參數，如產品費用，可以通過 FIDA 代幣的治理投票來改變。
 
 <img src="/img/2021-09-01-ascendex/4.png">
 
@@ -64,13 +69,11 @@ Ultra已經開發了自己的定制 EOSIO 區塊鏈，通過更好的資源分�
 
 想必讀者一定會想說在哪裡可以購買上述具有潛力的項目幣種，而這次要推薦的就是 AscendEX。AscendEX 是一個全球性的加密貨幣金融平台，擁有全面的產品，包括現貨、保證金和期貨交易、錢包服務，以及對 150 多個區塊鏈項目。AscendEX 於 2018 年推出，通過高流動性的交易平台和安全的托管解決方案，為全球超過100萬零售和機構客戶提供服務。AscendEX 通過投資回報率在其初始交易所產品上成為一個領先的平台，支持一些來自 DeFi 生態系統的行業最創新的項目，如Thorchain、xDai Stake 和 Serum。
 
-<img src="/img/2021-09-01-ascendex/8.png">
-
-AscendEX 的用戶可以獨家獲得代幣空投的機會，並能在最早階段購買代幣。目前也正在推出 Curve x polygon 高利率 Defi 挖礦的活動，在 9/1 - 9/7 期間每天加息 10%。
-
 <img src="/img/2021-09-01-ascendex/9.png">
 
-> 若看到這裏您對 AscendEX 感興趣，歡迎使用 **WalkinCat** 的邀請碼：**BWALKNCAT**，或是掃描上面的 QR Code 進行註冊，就有機會獲得禮包 (交易 10% 返現、有交易的用戶可獲得 $2–$50 不等的空投、完成指定任務獲得合約贈金 $300) 加入官方 Telegram 群有更多活動等你!
+> 若看到這裏您對 AscendEX 感興趣，歡迎使用 **WalkinCat** 的邀請碼：**BWALKNCAT**，或是掃描上面的 QR Code 進行註冊，就有機會獲得禮包 (交易 10% 返現、有交易的用戶可獲得 $2–$50 不等的空投、完成指定任務獲得合約贈金 $300) 加入官方 Telegram 群有更多活動等你! 
+
+> https://t.me/AscendEXTCN
 
 # WalkinCat
 各位讀者好大家好，這裡是 WalkinCat 社群，基本上我們是希望以出圈為目的，在這裡會有各種不同的人，希望大家可以在這裡互相交換資訊，一起玩耍一起聊天一起學習正確的資訊！
