@@ -5,10 +5,10 @@ cover: /img/2021-11-22-defichain/001.png
 tags:
     - 比特幣
     - 智能合約
-    - 公鏈
-    - DeFi Chain
-categories:
     - 工商文章
+    - 公鏈
+categories:
+    - DeFiChain
 feature: true
 ---
 # 三分鐘讀懂遞飛鏈 DeFiChain：跳過圖靈完備區塊鏈「系統風險」的 DeFi 解決方案
