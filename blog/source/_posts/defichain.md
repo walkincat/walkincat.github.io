@@ -1,15 +1,17 @@
 ---
-title: 工商文章 | 三分鐘讀懂遞飛鏈 DeFiChain :跳過圖靈完備區塊鏈「系統風險」的 DeFi 解決方案
+title: 工商文章 | 三分鐘讀懂遞飛鏈 DeFiChain
 date: 2021-11-22 09:30:00
 cover: /img/2021-11-22-defichain/001.png
 tags:
     - 比特幣
     - 智能合約
     - 公鏈
+    - DeFi Chain
 categories:
     - 工商文章
 feature: true
 ---
+# 三分鐘讀懂遞飛鏈 DeFiChain：跳過圖靈完備區塊鏈「系統風險」的 DeFi 解決方案
 
 > 此篇來自：DeFiChain 
 
@@ -47,7 +49,7 @@ DFI 是遞飛鏈 DeFiChain 推出的原生代幣，發行總量不超過 12 億�
 
 在約 12 億美元的 DFI 代幣中，49% 將於一開始發行給遞飛鏈基金會。其餘部分將隨時間發放給主節點區塊獎勵。 2021 年中以通過治理投票銷毀所有基金會代幣以進行完全去中心化的目標。遞飛鏈從來沒有舉辦任何種子期融資、對外資融資或 ICO 等，所有區塊獎勵是來自採用者參與。
 
-<img src="/img/2021-11-22-defichain/007.png">
+<img src="/img/2021-11-22-defichain/007.jpg">
 
 ## 團隊
 
