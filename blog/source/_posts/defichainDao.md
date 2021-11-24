@@ -5,7 +5,6 @@ cover: /img/2021-11-24-defichainDao/001.png
 tags:
     - 比特幣
     - 智能合約
-    - 工商文章
     - 公鏈
 categories:
     - DeFiChain
