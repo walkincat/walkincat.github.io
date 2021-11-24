@@ -11,11 +11,9 @@ categories:
     - DeFiChain
 feature: true
 ---
-# 三分鐘讀懂遞飛鏈 DeFiChain：跳過圖靈完備區塊鏈「系統風險」的 DeFi 解決方案
+此篇來自：DeFiChain 
 
-> 此篇來自：DeFiChain 
-
-## 前言
+### 跳過圖靈完備區塊鏈「系統風險」的 DeFi 解決方案
 
 <img src="/img/2021-11-22-defichain/002.png">
 
@@ -55,6 +53,7 @@ DFI 是遞飛鏈 DeFiChain 推出的原生代幣，發行總量不超過 12 億�
 
 遞飛鏈團隊 DeFiChain 是首席技術官和首席研究員蔡佑軍（U-Zyn Chua）主導的。蔡佑軍曾與新加坡政府合作推出國家區塊鏈項目，也曾領導世界上第一個正式推出國家中央數字貨幣的項目巴哈馬沙錢。另一位團隊聯合創始人朱利安·霍斯 (Julian Hosp) 醫生擁有豐富的商業和營銷經驗，從醫療行業離開後轉入了區塊鏈領域的研究之中，目前是德語系國家最多關注視頻平台和頗具影響力的加密貨幣領域專家。
 
-
+#### 關於DeFiChain
+- 中文Telegram: https://t.me/defichain_ZH
 
 
