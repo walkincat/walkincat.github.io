@@ -101,7 +101,7 @@ site_meta:
 
 # For local development only!
 gitalk:
-  enable: true
+  enable: false
   autoExpand: true
   clientID: ''
   clientSecret: ''
@@ -111,7 +111,7 @@ gitalk:
   id: uid
   language: en
   distractionFreeMode: true
-  recentComment: true
+  recentComment: false
   proxy: ''
 
 # Valine comment plugin (recommended!)

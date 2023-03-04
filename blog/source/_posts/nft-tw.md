@@ -1,10 +1,10 @@
 ---
-title: NFT 市場在即，台灣平台誰與爭鋒？
+title: 原創文章 | NFT 市場在即，台灣平台誰與爭鋒？
 date: 2021-08-19 13:00:00
 cover: /img/2021-08-18-nft-tw/logo.png
 tags:
     - NFT
-    - 台灣
+    - 原創文章
 categories:
     - NFT
 feature: true

@@ -1,9 +1,10 @@
 ---
-title: FootPrint 避坑指南
+title: 工商文章 | FootPrint 避坑指南
 date: 2021-10-21 09:00:00
 cover: /img/2021-10-21-footprint/logo.png
 tags:
     - 分析
+    - 工商文章
 categories:
     - 教學
 feature: true

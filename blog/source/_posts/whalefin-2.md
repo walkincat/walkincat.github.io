@@ -1,9 +1,10 @@
 ---
-title: 五大核心功能助力用戶加密資產增值，Amber Group 新產品 WhaleFin 詳解!
+title: 工商文章 | 五大核心功能助力用戶加密資產增值，Amber Group 新產品 WhaleFin 詳解!
 date: 2022-02-05 18:00:00
 cover: /img/2022-02-04-whalefin/1.jpeg
 tags:
     - CeFi
+    - 工商文章
 categories:
     - CeFi
 feature: true

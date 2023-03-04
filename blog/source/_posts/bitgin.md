@@ -3,12 +3,12 @@ title: 工商文章 | 如何在台灣購買最便宜的 USDT — BITGIN
 date: 2021-07-23 12:00:00
 cover: https://s3cdn.yourator.co/banners/banners/000/001/668/home/2f064fbdb938ac74ebae36a2051b0f5f537344e1.png
 tags:
-    - Exchange
+    - 工商文章
     - 法幣交易所
     - Bitgin
     - 交易所
 categories:
-    - 工商文章
+    - Exchange
 feature: true
 ---
 在區塊鏈的世界中，有許多種加密貨幣，像我們熟知的比特幣（BTC）、以太幣（ETH）還有最近火熱的狗狗幣（Doge）。除了上述的加密貨幣外，當然還有大家最常用的 USDT，在網路或新聞上常常會聽到泰達幣就是它。這個泰達幣（USDT）又是什麼呢？

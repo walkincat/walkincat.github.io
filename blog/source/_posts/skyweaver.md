@@ -7,6 +7,7 @@ tags:
     - Blockchain
     - NFT
     - GameFi
+    - 原創文章
 categories:
     - NFT
     - GameFi

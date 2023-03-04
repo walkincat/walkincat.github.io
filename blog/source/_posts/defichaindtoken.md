@@ -1,11 +1,12 @@
 ---
-title: 什麼是去中心化資產？他們是如何運作？
+title: 工商文章 | 什麼是去中心化資產？它們是如何運作？
 date: 2021-12-22 18:00:00
 cover: /img/2021-12-22-defichaindtoken/001.png
 tags:
     - 比特幣
     - 智能合約
     - 公鏈
+    - 工商文章
 categories:
     - DeFiChain
 feature: true

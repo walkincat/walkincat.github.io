@@ -1,9 +1,11 @@
 ---
-title: 從入門到進階，Amber Group推出全新一站式加密金融服務平台無論是小白還是老手，Amber Group 幫你玩轉加密貨幣投資
+title: 工商文章 | 從入門到進階，Amber Group 推出全新一站式加密金融服務平台無論是小白還是老手，Amber Group 幫你玩轉加密貨幣投資
 date: 2022-02-04 18:00:00
 cover: /img/2022-02-04-whalefin/1.png
 tags:
     - CeFi
+    - 工商文章
+    - Amber Group
 categories:
     - CeFi
 feature: true

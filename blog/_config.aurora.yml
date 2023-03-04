@@ -141,7 +141,7 @@ valine:
   meta: ['nick', 'mail']
   requiredFields: []
   admin: 'walkincat'
-  recentComment: true
+  recentComment: false
 
 # Enable Busuanzi statistic plugin
 # see http://ibruce.info/2015/04/04/busuanzi/

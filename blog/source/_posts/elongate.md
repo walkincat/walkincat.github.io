@@ -4,8 +4,8 @@ date: 2021-07-23 10:00:00
 cover: /img/2021-07-23-elongate/cover.png
 tags:
     - Elongate
-categories:
     - 工商文章
+categories:
 feature: true
 ---
 ## 起源

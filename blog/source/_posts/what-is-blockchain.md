@@ -4,11 +4,8 @@ date: 2021-07-20 08:00:00
 cover: /img/2021-07-20-what-is-blockchain/what-is-blockchain.png
 tags:
     - 區塊鏈
-    - Blockchain
-    - Bitcoin
-    - 科普
+    - 科普知識
 categories:
-    - 科普
 # feature: true
 ---
 > 看到區塊鏈在各個產業不斷受到重視，所以也就萌生了來寫區塊鏈教學的這個想法，希望可以透過更簡單更白話的方式讓大家了解區塊鏈也能根據了解的程度去防止被更多的不法人士拐騙。

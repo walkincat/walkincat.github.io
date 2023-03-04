@@ -1,11 +1,12 @@
 ---
-title: 解決 NFT 流動性問題？讓 NFTX 來告訴你！
+title: 原創文章 | 解決 NFT 流動性問題？讓 NFTX 來告訴你！
 date: 2021-08-16 18:00:00
 cover: /img/2021-08-16-nftx/logo.png
 tags:
     - NFT
     - NFTX
     - DAO
+    - 原創文章
 categories:
     - NFT
 feature: false

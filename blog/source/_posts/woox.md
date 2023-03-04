@@ -1,10 +1,11 @@
 ---
-title: 超越頂級交易所！數據證明 WOO X 的訂單簿深度有多強！
+title: 工商文章 | 超越頂級交易所！數據證明 WOO X 的訂單簿深度有多強！
 date: 2021-08-21 18:00:00
 cover: /img/2021-08-21-woox/cover.png
 tags:
     - Exchange
     - WOO X
+    - 工商文章
 categories:
     - 交易所
 feature: true

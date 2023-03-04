@@ -1,10 +1,11 @@
 ---
-title: 工具分享 | 不亞於 DeFi 投資的新選擇—雙幣投資
+title: 工具分享 | 不亞於 DeFi 投資的新選擇 — 雙幣投資
 date: 2021-09-03 15:00:00
 cover: /img/2021-09-03-mp-dual/cover.png
 tags:
     - Matrixport
     - 保本理財
+    - 工具分享
 categories:
     - CeFi
     - DeFi

@@ -1,10 +1,11 @@
 ---
-title: Coingecko 首次投資的元宇宙項目 - StarryNift
+title: 原創文章 | Coingecko 首次投資的元宇宙項目 - StarryNift
 date: 2021-08-06 18:00:00
 cover: /img/2021-08-06-starrynift/1.png
 tags:
     - NFT
     - MetaVerse
+    - 原創文章
 categories:
     - NFT
 feature: true

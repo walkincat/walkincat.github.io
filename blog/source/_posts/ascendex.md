@@ -1,5 +1,5 @@
 ---
-title: 爆火的 Solana 與 NFT 項目如何選? AscendEX 熱門項目指南
+title: 工商文章 | 火爆的 Solana 與 NFT 項目如何選? AscendEX 熱門項目指南
 date: 2021-09-14 09:00:00
 cover: /img/2021-09-01-ascendex/logo.jpeg
 tags:
