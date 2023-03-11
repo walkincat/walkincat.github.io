@@ -4,6 +4,7 @@ date: 2021-11-24 22:00:00
 cover: /img/2021-11-24-footprintNFT/000.png
 tags:
     - NFT
+    - 工商文章
 categories:
     - Research
 feature: true

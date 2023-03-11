@@ -4,7 +4,7 @@ date: 2021-07-20 12:00:00
 cover: /img/logo.png
 tags:
     - Airdrop
-    - WalkinCat
+    - 空投分享
 categories:
     - 空投
 feature: true

@@ -5,6 +5,7 @@ cover: https://i.imgur.com/cMxgrFi.png
 tags:
     - Celo
     - 公鏈
+    - 工商文章
 categories:
     - Research
 feature: true

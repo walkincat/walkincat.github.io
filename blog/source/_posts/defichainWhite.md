@@ -6,6 +6,7 @@ tags:
     - 比特幣
     - 智能合約
     - 公鏈
+    - 工商文章
 categories:
     - DeFiChain
 feature: true
