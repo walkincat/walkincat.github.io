@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://walkincat.org/post/2023-Mar-W3.html</loc>
+    
+    <lastmod>2023-03-18</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://walkincat.org/post/2023-Mar-W2.html</loc>
     
     <lastmod>2023-03-11</lastmod>
@@ -242,260 +249,260 @@
 
   <url>
     <loc>https://walkincat.org/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
+    <loc>https://walkincat.org/tags/%E6%AF%8F%E9%80%B1%E5%B9%A3%E5%A0%B1/</loc>
+    <lastmod>2023-03-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://walkincat.org/tags/Airdrop/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/%E7%A9%BA%E6%8A%95%E5%88%86%E4%BA%AB/</loc>
-    <lastmod>2023-03-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://walkincat.org/tags/%E6%AF%8F%E9%80%B1%E5%B9%A3%E5%A0%B1/</loc>
-    <lastmod>2023-03-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://walkincat.org/tags/Exchange/</loc>
-    <lastmod>2023-03-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://walkincat.org/tags/AscendEX/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/%E5%B7%A5%E5%95%86%E6%96%87%E7%AB%A0/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/%E6%B3%95%E5%B9%A3%E4%BA%A4%E6%98%93%E6%89%80/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/Bitgin/</loc>
-    <lastmod>2023-03-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://walkincat.org/tags/%E6%90%AC%E7%A3%9A/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/%E4%BA%A4%E6%98%93%E6%89%80/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://walkincat.org/tags/%E6%90%AC%E7%A3%9A/</loc>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/Celo/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/%E5%85%AC%E9%8F%88/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/%E6%AF%94%E7%89%B9%E5%B9%A3/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%B4%84/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://walkincat.org/tags/%E5%88%86%E6%9E%90/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <loc>https://walkincat.org/tags/Exchange/</loc>
+    <lastmod>2023-03-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://walkincat.org/tags/AscendEX/</loc>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/Elongate/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/NFT/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/Matrixport/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/%E4%BF%9D%E6%9C%AC%E7%90%86%E8%B2%A1/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/%E5%B7%A5%E5%85%B7%E5%88%86%E4%BA%AB/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://walkincat.org/tags/%E5%88%86%E6%9E%90/</loc>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/%E5%8E%9F%E5%89%B5%E6%96%87%E7%AB%A0/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/%E8%A9%90%E9%A8%99/</loc>
-    <lastmod>2023-03-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://walkincat.org/tags/NFTX/</loc>
-    <lastmod>2023-03-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://walkincat.org/tags/DAO/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/%E5%8D%80%E5%A1%8A%E9%8F%88/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/Blockchain/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/GameFi/</loc>
-    <lastmod>2023-03-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://walkincat.org/tags/MetaVerse/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/Solana/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/%E7%A7%91%E6%99%AE/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/%E5%90%88%E4%BD%9C%E5%88%86%E4%BA%AB/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://walkincat.org/tags/MetaVerse/</loc>
+    <lastmod>2023-03-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://walkincat.org/tags/NFTX/</loc>
+    <lastmod>2023-03-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://walkincat.org/tags/DAO/</loc>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/Web3/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/CeFi/</loc>
-    <lastmod>2023-03-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://walkincat.org/tags/Amber-Group/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/%E7%A7%91%E6%99%AE%E7%9F%A5%E8%AD%98/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://walkincat.org/tags/Amber-Group/</loc>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/tags/WOO-X/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -504,91 +511,91 @@
   
   <url>
     <loc>https://walkincat.org/categories/%E7%A9%BA%E6%8A%95/</loc>
-    <lastmod>2023-03-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://walkincat.org/categories/%E4%BA%A4%E6%98%93%E6%89%80/</loc>
-    <lastmod>2023-03-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://walkincat.org/categories/%E6%90%AC%E7%A3%9A/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/categories/Exchange/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://walkincat.org/categories/%E6%90%AC%E7%A3%9A/</loc>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/categories/Research/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/categories/DeFiChain/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://walkincat.org/categories/%E6%95%99%E5%AD%B8/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <loc>https://walkincat.org/categories/%E4%BA%A4%E6%98%93%E6%89%80/</loc>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/categories/CeFi/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://walkincat.org/categories/%E6%95%99%E5%AD%B8/</loc>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/categories/NFT/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/categories/Solana/</loc>
-    <lastmod>2023-03-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://walkincat.org/categories/Web3/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/categories/CeFi/DeFi/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://walkincat.org/categories/NFT/GameFi/</loc>
-    <lastmod>2023-03-11</lastmod>
+    <lastmod>2023-03-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://walkincat.org/categories/Web3/</loc>
+    <lastmod>2023-03-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
