@@ -36,7 +36,7 @@ ZetaChain 是可連接智能合約區塊鏈與非智能合約區塊鏈的全鏈�
 
 - [原文連結](https://twitter.com/tokeninsightcn/status/1640979030844526592)
   
-![ZetaChain](../../public/img/2023-04-15-weekly/zetachain.png)
+![ZetaChain](../img/2023-04-15-weekly/zetachain.png)
 
 ## 由以太坊區塊空間支持的超額抵押穩定幣 DINERO 有哪些特色？
 
@@ -44,7 +44,7 @@ Dinero Protocol推出了一種 ETH 超額抵押型的去中心化穩定幣 DINER
 
 - [https://twitter.com/redactedcartel/status/1643994653325156353](https://twitter.com/redactedcartel/status/1643994653325156353)
 
-![Dinero](../../public/img/2023-04-15-weekly/dinero.png)
+![Dinero](../img/2023-04-15-weekly/dinero.png)
 
 ## 從社群本質探究 Web3 社群產品的現狀和未來
 
@@ -56,7 +56,7 @@ Dinero Protocol推出了一種 ETH 超額抵押型的去中心化穩定幣 DINER
 
 - [https://www.panewslab.com/zh/articledetails/l87j29be.html](https://www.panewslab.com/zh/articledetails/l87j29be.html)
 
-![Web3 Social](../../public/img/2023-04-15-weekly/AC.png)
+![Web3 Social](../img/2023-04-15-weekly/ac.png)
 
 ## Flatcoins 能否成為下一個最熱門的 DeFi 故事？
 
@@ -66,7 +66,7 @@ Dinero Protocol推出了一種 ETH 超額抵押型的去中心化穩定幣 DINER
 
 [https://twitter.com/0xShinChannn/status/1642173226834083841](https://twitter.com/0xShinChannn/status/1642173226834083841)
 
-![FlatCoins](../../public/img/2023-04-15-weekly/Flatcoins.png)
+![FlatCoins](../img/2023-04-15-weekly/flatcoins.png)
 
 ## 交易平台激勵模式思考，流動性和交易行為哪個更值得激勵?
 
@@ -80,7 +80,7 @@ Dinero Protocol推出了一種 ETH 超額抵押型的去中心化穩定幣 DINER
 
 [https://research.mintventures.fund/2023/04/10/zh-liquidity-vs-trading-behavior-an-in-depth-analysis-of-incentive-models-on-trading-platfoms/](https://research.mintventures.fund/2023/04/10/zh-liquidity-vs-trading-behavior-an-in-depth-analysis-of-incentive-models-on-trading-platfoms/)
 
-![Mint](../../public/img/2023-04-15-weekly/mint.png)
+![Mint](../img/2023-04-15-weekly/mint.png)
 
 ## ABCDE：重新思考 Appchain、ZK 和 GameFi 賽道
 
@@ -94,7 +94,7 @@ ABCDE 透過在 Q1 所經歷的許多專案來分析及思考應用鏈、ZK 系�
 
 [https://medium.com/@ABCDE.com/cn-abcde-香港大会-重新思考3个热门赛道-14a3f996f10f](https://medium.com/@ABCDE.com/cn-abcde-%E9%A6%99%E6%B8%AF%E5%A4%A7%E4%BC%9A-%E9%87%8D%E6%96%B0%E6%80%9D%E8%80%833%E4%B8%AA%E7%83%AD%E9%97%A8%E8%B5%9B%E9%81%93-14a3f996f10f)
 
-![ABCDE](../../public/img/2023-04-15-weekly/ABCDE.png)
+![ABCDE](../img/2023-04-15-weekly/abcde.png)
 
 ## a16z：2023 年的加密貨幣狀況報告
 
@@ -114,7 +114,7 @@ ABCDE 透過在 Q1 所經歷的許多專案來分析及思考應用鏈、ZK 系�
 
 [https://a16zcrypto.com/content/article/state-of-crypto-report-2023/?s=35](https://a16zcrypto.com/content/article/state-of-crypto-report-2023/?s=35)
 
-![A16Z](../../public/img/2023-04-15-weekly/a16z.jpeg)
+![A16Z](../img/2023-04-15-weekly/a16z-web3.png)
 
 ## 探索不同 RWA 專案的特點和潛力
 
@@ -146,7 +146,7 @@ ABCDE 透過在 Q1 所經歷的許多專案來分析及思考應用鏈、ZK 系�
 
 [https://www.chaincatcher.com/article/2091100](https://www.chaincatcher.com/article/2091100)
 
-![2023Q1](../../public/img/2023-04-15-weekly/2023Q1.png)
+![2023Q1](../img/2023-04-15-weekly/2023-q1.png)
 
 ## 上海升級如何推動以太坊前進？
 
@@ -160,7 +160,7 @@ ABCDE 透過在 Q1 所經歷的許多專案來分析及思考應用鏈、ZK 系�
 
 [https://www.bankless.com/how-shapella-pushes-ethereum-forward](https://www.bankless.com/how-shapella-pushes-ethereum-forward)
 
-![ethupgrade](../../public/img/2023-04-15-weekly/ethupgrade.jpeg)
+![ethupgrade](../img/2023-04-15-weekly/eth-upgrade.png)
 
 # 結尾
 
