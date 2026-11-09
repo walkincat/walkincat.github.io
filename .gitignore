@@ -1,0 +1,13 @@
+node_modules/
+.next/
+out/
+.velite/
+.cache/
+.lighthouseci/
+public/static/
+next-env.d.ts
+*.tsbuildinfo
+.wrangler/
+.DS_Store
+og/.og-render.html
+shots/
