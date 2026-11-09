@@ -10,7 +10,11 @@ export const metadata = pageMetadata({
   path: "/posts/",
 });
 
+// With 46 posts, the card grid shows only the newest few; 全部文章 below lists every post.
+const CARD_COUNT = 6;
+
 export default function PostsPage() {
+  const cards = posts.slice(0, CARD_COUNT);
   return (
     <main id="main">
       <div className="wc-container wc-pagehead">
@@ -28,8 +32,8 @@ export default function PostsPage() {
           </div>
           {posts.length > 0 ? (
             <div className="wc-cards">
-              {posts.map((post, i) => (
-                <PostCard key={post.slug} post={post} index={i} />
+              {cards.map((post, i) => (
+                <PostCard key={post.slug} post={post} index={i} eager={i === 0} />
               ))}
             </div>
           ) : (

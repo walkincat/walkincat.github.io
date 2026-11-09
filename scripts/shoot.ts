@@ -16,7 +16,7 @@ const { values } = parseArgs({
   },
 });
 
-const pages = (values.page?.length ? values.page : ["index=/", "list=/posts/", "post=/posts/sample-stablecoin-basics/"]).map((p) => {
+const pages = (values.page?.length ? values.page : ["index=/", "list=/posts/", "post=/posts/2023-June-W2/"]).map((p) => {
   const [name, path] = p.split("=");
   return { name, path };
 });
