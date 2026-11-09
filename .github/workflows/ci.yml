@@ -45,6 +45,10 @@ jobs:
           bun scripts/shoot.ts --base http://localhost:4173 --dir shots
       - name: Lighthouse mobile (performance and SEO >= 0.9)
         run: bunx lhci autorun
+      - name: Lighthouse scores
+        if: always()
+        run: |
+          bun -e 'const fs=require("fs");const d=".lighthouseci/reports";for(const f of fs.readdirSync(d).filter(f=>f.endsWith(".report.json")).sort()){const r=JSON.parse(fs.readFileSync(d+"/"+f));const c=r.categories;console.log(new URL(r.finalDisplayedUrl).pathname.padEnd(40),r.configSettings.formFactor,"performance",Math.round(c.performance.score*100),"seo",Math.round(c.seo.score*100))}'
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -53,3 +57,4 @@ jobs:
             shots/
             .lighthouseci/
           if-no-files-found: ignore
+          include-hidden-files: true
