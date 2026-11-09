@@ -54,3 +54,12 @@ describe("GitHub Pages artifact", () => {
     }
   });
 });
+
+describe("footer social links", () => {
+  const html = readOut("index.html");
+  test("X links to the official account", () => expect(html).toContain('href="https://x.com/WalkinCatorg"'));
+  test("Instagram and Threads stay as 連結待補 until confirmed", () => {
+    expect(html).toMatch(/Instagram <small>連結待補<\/small>/);
+    expect(html).toMatch(/Threads <small>連結待補<\/small>/);
+  });
+});
