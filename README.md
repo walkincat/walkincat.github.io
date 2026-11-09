@@ -4,7 +4,26 @@ Static site for WalkinCat 走路貓: plain-language crypto tutorials for beginne
 
 Built with [Bun](https://bun.sh), Next.js (`output: "export"`, `trailingSlash: true`) and [velite](https://velite.js.org). The output is plain static files in `out/`.
 
-## Cloudflare Pages settings
+## Deployment: GitHub Pages (current)
+
+`.github/workflows/deploy-pages.yml` deploys on every push to `main`. It can also be started by hand (`workflow_dispatch`). The workflow:
+
+1. Installs the pinned Bun version.
+2. Runs `bun install --frozen-lockfile && bun run build && bun test`, the same as CI.
+3. Uploads `out/` with `actions/upload-pages-artifact`.
+4. Publishes it with `actions/deploy-pages`.
+
+The site is a user/org site (`walkincat.github.io`), so it is served from `/` with no `basePath`. Canonical URLs stay `https://walkincat.org/...`.
+
+- **Pages source**: Settings → Pages → Source must be **GitHub Actions**, not the legacy `gh-pages` branch.
+- **Custom domain**: set `walkincat.org` in Settings → Pages. The repository has **no `CNAME` file**, and the workflow fails if `out/` contains one.
+- **Jekyll**: with Actions deployments the artifact is served as-is, without Jekyll processing, so `_next/` works.
+- **Trailing slash**: GitHub Pages answers a directory URL without a trailing slash with a **301** to the slash form. Measured on this repository's Pages site: `/archives` → `301 https://walkincat.org/archives/`.
+- **404**: `out/404.html` at the artifact root is served as the 404 page for any missing path, with HTTP status 404. It has `noindex` and no canonical.
+- **HTTPS**: http → https is handled by "Enforce HTTPS" in the Pages settings.
+- **www**: www → apex is handled by GitHub Pages when both DNS records point to it.
+
+## Cloudflare Pages settings (later)
 
 | Setting | Value |
 |---|---|
@@ -79,6 +98,6 @@ Links shared on social media use UTM parameters: see [docs/utm.md](docs/utm.md).
 
 - build, typecheck and tests
 - link check (external links that only appear in migrated post bodies are reported as warnings: some 2021–2023 sources are gone)
-- OG regeneration
+- OG regeneration (size check via `scripts/png-size.ts`)
 - Playwright layout check: no horizontal scroll at 390, 360 and 1440 px widths
 - Lighthouse mobile: performance and SEO must both be ≥ 0.9

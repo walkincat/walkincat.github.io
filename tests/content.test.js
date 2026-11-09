@@ -64,3 +64,22 @@ describe("migrated images", () => {
     for (const src of srcs) expect(src).toMatch(/^\/(?!\/)/);
   });
 });
+
+describe("GitHub Pages artifact", () => {
+  test("out/ and public/ contain no CNAME file", async () => {
+    const { readdirSync } = await import("node:fs");
+    const walk = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(join(dir, e.name)) : [e.name]));
+    for (const dir of ["out", "public"]) {
+      expect(walk(join(import.meta.dir, "..", dir)).filter((n) => n.toLowerCase() === "cname")).toEqual([]);
+    }
+  });
+});
+
+describe("footer social links", () => {
+  const html = readOut("index.html");
+  test("X links to the official account", () => expect(html).toContain('href="https://x.com/WalkinCatorg"'));
+  test("Instagram and Threads stay as 連結待補 until confirmed", () => {
+    expect(html).toMatch(/Instagram(<!-- -->)? <small>連結待補<\/small>/);
+    expect(html).toMatch(/Threads(<!-- -->)? <small>連結待補<\/small>/);
+  });
+});

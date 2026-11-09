@@ -18,7 +18,7 @@ export function absoluteUrl(path: string): string {
 export type SocialLink = { name: string; href: string | null };
 
 // Telegram URLs come from the previous README of this repository.
-// X is the confirmed official account. Instagram and Threads are unconfirmed and render as "連結待補" until a real URL is set.
+// X is confirmed. Instagram and Threads are unconfirmed and render as "連結待補" until a real URL is set.
 export const SOCIAL_LINKS: SocialLink[] = [
   { name: "Telegram 社群", href: "https://t.me/walkincat" },
   { name: "Telegram 頻道", href: "https://t.me/walkincat2020" },

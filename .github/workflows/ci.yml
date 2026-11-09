@@ -38,11 +38,11 @@ jobs:
       - name: OG image reproduces at 1200x630
         run: |
           bun scripts/og.ts --out /tmp/og-home.png
-          bun -e 'const b=require("fs").readFileSync("/tmp/og-home.png");const w=b.readUInt32BE(16),h=b.readUInt32BE(20);console.log(`regenerated og ${w}x${h}`);if(w!==1200||h!==630)process.exit(1)'
+          bun scripts/png-size.ts /tmp/og-home.png --expect 1200x630
       - name: Layout check (no horizontal scroll at 390/360/1440, headline and subtitle wrapping)
         run: |
           bun scripts/serve.ts out &
-          for i in $(seq 1 20); do curl -fs -o /dev/null http://localhost:4173/ && break; sleep 0.5; done
+          for _ in $(seq 1 20); do curl -fs -o /dev/null http://localhost:4173/ && break; sleep 0.5; done
           bun scripts/shoot.ts --base http://localhost:4173 --dir shots
       - name: Lighthouse mobile (performance and SEO >= 0.9)
         run: bunx lhci autorun
