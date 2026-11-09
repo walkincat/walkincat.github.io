@@ -44,3 +44,13 @@ describe("post page", () => {
     expect(html).not.toContain("此篇風險說明待補");
   });
 });
+
+describe("GitHub Pages artifact", () => {
+  test("out/ and public/ contain no CNAME file", async () => {
+    const { readdirSync } = await import("node:fs");
+    const walk = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(join(dir, e.name)) : [e.name]));
+    for (const dir of ["out", "public"]) {
+      expect(walk(join(import.meta.dir, "..", dir)).filter((n) => n.toLowerCase() === "cname")).toEqual([]);
+    }
+  });
+});
