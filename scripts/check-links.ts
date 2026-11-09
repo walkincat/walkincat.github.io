@@ -8,6 +8,9 @@ import { dirname, join, relative } from "node:path";
 const OUT = join(import.meta.dir, "..", "out");
 const SITE = "https://walkincat.org";
 const checkExternal = process.argv.includes("--external");
+// Hosts that answer automated requests from CI IP ranges with 403 even when the page exists.
+// For these, 403 is reported as a warning instead of a failure; other errors still fail.
+const BOT_BLOCKING_HOSTS = new Set(["x.com"]);
 
 function htmlFiles(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
@@ -78,6 +81,10 @@ if (checkExternal) {
       }
     }
     console.log(`[links] external ${status} ${href}`);
+    if (status === 403 && BOT_BLOCKING_HOSTS.has(new URL(href).hostname)) {
+      console.warn(`[links] warning: ${href} -> 403 (host blocks automated requests; not treated as broken)`);
+      continue;
+    }
     if (status === 0 || status >= 400) errors.push(`external ${href} -> ${status || "network error"} (from ${pages[0]})`);
   }
 }
