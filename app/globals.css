@@ -257,6 +257,7 @@ a:hover { color: var(--wc-lav-800); text-decoration-thickness: 2px; }
 .wc-disclaimer strong { color: var(--wc-ink); }
 
 .wc-postnav { display: flex; flex-wrap: wrap; gap: var(--wc-space-3); margin-top: var(--wc-space-6); }
+@media (max-width: 767px) { .wc-postnav { flex-direction: column; } }
 
 /* Footer */
 .wc-footer { background: var(--wc-ink); color: var(--wc-paper); padding-block: var(--wc-space-7); margin-top: var(--wc-space-8); }

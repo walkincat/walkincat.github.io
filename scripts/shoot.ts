@@ -8,6 +8,7 @@
 // On post pages (QA item in brackets):
 // - [L2] h1 / h2 / h3 line heights 1.35 / 1.4 / 1.45
 // - [L3] the summary is the small size, below the body size
+// - [L4] post navigation buttons: one full-width column on phones, one row from 768px
 // Usage: bun scripts/shoot.ts --base http://localhost:4173 --dir shots [--page name=/path/ ...]
 import { mkdirSync } from "node:fs";
 import { join } from "node:path";
@@ -76,6 +77,18 @@ async function postChecks(tab: Page): Promise<string[]> {
       if (!(s < b)) fails.push(`L3 summary ${s}px is not smaller than body ${b}px`);
       if (s < 15 || s > 16) fails.push(`L3 summary ${s}px outside 15-16px`);
       if (!near(ratio(summary), 1.65)) fails.push(`L3 summary line-height ${ratio(summary).toFixed(3)} != 1.65`);
+    }
+
+    // L4: below 768px the post navigation buttons are one full-width column; from 768px they share one row.
+    const nav = first(".wc-postnav");
+    const btns = nav ? [...nav.querySelectorAll(".wc-btn")].map((b) => b.getBoundingClientRect()) : [];
+    if (nav && btns.length > 1) {
+      const navW = nav.getBoundingClientRect().width;
+      const rows = new Set(btns.map((b) => Math.round(b.top))).size;
+      if (window.innerWidth < 768) {
+        if (rows !== btns.length || btns.some((b) => Math.abs(b.width - navW) > 1))
+          fails.push(`L4 ${btns.length} nav buttons in ${rows} rows, widths ${btns.map((b) => Math.round(b.width)).join("/")} of ${Math.round(navW)}`);
+      } else if (rows !== 1) fails.push(`L4 ${btns.length} nav buttons in ${rows} rows`);
     }
 
     return fails;
