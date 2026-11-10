@@ -1,22 +1,12 @@
 import { WarningIcon } from "./icons";
+import { NotAdviceNote } from "./NotAdviceNote";
 
 /**
- * risk_note block. An empty risk_note renders the fixed "待補" state; this
- * component never generates risk text of its own.
+ * risk_note block. An empty risk_note renders the shared NotAdviceNote; this
+ * component never generates article-specific risk text.
  */
 export function RiskNote({ items }: { items: readonly string[] }) {
-  if (items.length === 0) {
-    return (
-      <section className="wc-risk wc-risk--pending" aria-labelledby="risk-title" data-risk="pending">
-        <h2 className="wc-risk__head" id="risk-title">
-          <WarningIcon />
-          風險提醒
-          <span className="wc-badge wc-badge--pending">待補</span>
-        </h2>
-        <p className="wc-risk__pending-text">此篇風險說明待補，閱讀時請自行評估</p>
-      </section>
-    );
-  }
+  if (items.length === 0) return <NotAdviceNote />;
   return (
     <section className="wc-risk wc-risk--normal" aria-labelledby="risk-title" data-risk="filled">
       <h2 className="wc-risk__head" id="risk-title">

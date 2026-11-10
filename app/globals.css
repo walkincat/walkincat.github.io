@@ -244,13 +244,13 @@ a:hover { color: var(--wc-lav-800); text-decoration-thickness: 2px; }
 /* Risk note */
 .wc-risk { margin-top: var(--wc-space-7); border-radius: var(--wc-radius-md); padding: var(--wc-space-5); }
 .wc-risk--normal { background: var(--wc-amber-100); border-left: 4px solid var(--wc-amber-500); }
-.wc-risk--pending { background: var(--wc-surface); border: 2px dashed var(--wc-amber-500); }
+.wc-risk--plain { background: var(--wc-surface); border-left: 4px solid var(--wc-amber-500); }
 .wc-risk__head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--wc-space-2); color: var(--wc-amber-700); font-weight: 700; font-size: var(--wc-fs-body); }
 .wc-risk__head svg { width: 22px; height: 22px; color: var(--wc-amber-500); flex: none; }
 .wc-risk ul { margin: var(--wc-space-3) 0 0; padding-left: 1.3em; }
 .wc-risk li + li { margin-top: var(--wc-space-2); }
 .wc-risk__foot { margin-top: var(--wc-space-3); font-size: var(--wc-fs-small); color: var(--wc-ink-muted); }
-.wc-risk__pending-text { margin-top: var(--wc-space-3); }
+.wc-risk__plain-text { margin-top: var(--wc-space-3); }
 
 .wc-disclaimer { margin-top: var(--wc-space-7); padding-top: var(--wc-space-5); border-top: 1px solid var(--wc-line); font-size: var(--wc-fs-xs); color: var(--wc-ink-muted); line-height: 1.7; }
 .wc-disclaimer strong { color: var(--wc-ink); }

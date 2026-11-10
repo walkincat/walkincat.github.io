@@ -1,14 +1,14 @@
 import { describe, expect, test } from "bun:test";
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { OUT, readOut } from "./helpers.js";
+import { OUT, SITE, canonicalsOf, readOut } from "./helpers.js";
 
 const CONTENT = join(import.meta.dir, "..", "content");
 
 describe("content/", () => {
   const files = readdirSync(CONTENT).filter((f) => f.endsWith(".md"));
-  test("ships the 46 migrated posts and no sample posts", async () => {
-    expect(files.length).toBe(46);
+  test("ships the 46 old-blog posts plus 11 Substack posts and no sample posts", async () => {
+    expect(files.length).toBe(57);
     for (const f of files) {
       const text = await Bun.file(join(CONTENT, f)).text();
       expect(text).not.toMatch(/^sample: true$/m);
@@ -43,14 +43,60 @@ describe("post page", () => {
     const html = readOut("posts/bitgin/index.html");
     expect(html).toContain('data-risk="filled"');
     expect(html).toContain("OTC 或 C2C 買幣");
-    expect(html).not.toContain("此篇風險說明待補");
+    expect(html).not.toContain('data-risk="not-advice"');
   });
-  test("missing risk_note renders the pending block", () => {
+  test("empty risk_note renders the shared not-advice block", () => {
     const html = readOut("posts/2023-June-W2/index.html");
-    expect(html).toContain("此篇風險說明待補");
+    expect(html).toContain('data-risk="not-advice"');
+    expect(html).not.toContain("此篇風險說明待補");
   });
   test("keeps the original date", () => {
     expect(readOut("posts/2023-June-W2/index.html")).toMatch(/<time[^>]*datetime="2023-06-10"/i);
+  });
+});
+
+const emptyRisk = (text) => /^risk_note: \[\]$/m.test(text) || !/^risk_note:/m.test(text);
+const postFiles = readdirSync(CONTENT).filter((f) => f.endsWith(".md"));
+
+describe("not-advice block shows exactly when risk_note is empty", () => {
+  const rows = postFiles.map((f) => {
+    const slug = f.replace(/\.md$/, "");
+    return { slug, empty: emptyRisk(readFileSync(join(CONTENT, f), "utf8")), html: readOut(`posts/${slug}/index.html`) };
+  });
+  test("48 posts have an empty risk_note (37 old-blog + 11 Substack), 9 keep their own", () => {
+    expect(rows.filter((r) => r.empty).length).toBe(48);
+    expect(rows.filter((r) => !r.empty).length).toBe(9);
+  });
+  test.each(rows.map((r) => [r.slug, r]))("%s", (_slug, r) => {
+    expect(r.html.includes('data-risk="not-advice"')).toBe(r.empty);
+    expect(r.html.includes('data-risk="filled"')).toBe(!r.empty);
+  });
+});
+
+// Substack posts migrated in PR2b (the other 15 Substack posts are the same weeklies as existing pages).
+const SUBSTACK = {
+  "2023-June-W4": "2023-06-24",
+  "2023-July-W1": "2023-07-01",
+  "2023-July-W2": "2023-07-08",
+  "2023-July-W3": "2023-07-15",
+  "2023-July-W4": "2023-07-22",
+  "2023-July-W5": "2023-07-29",
+  "lsdfi-lsd": "2023-06-20",
+  "trading-tools": "2023-06-02",
+  "ton-summer-lottery": "2023-06-02",
+  "brc20-ordinals": "2023-05-16",
+  "brc-ltc-20": "2023-05-11",
+};
+
+describe("Substack posts", () => {
+  const locs = [...readOut("sitemap.xml").matchAll(/<loc>([^<]*)<\/loc>/g)].map((m) => m[1]);
+  test.each(Object.entries(SUBSTACK))("%s: canonical equals sitemap loc, original date, no Substack images", (slug, date) => {
+    const loc = `${SITE}/posts/${slug}/`;
+    const html = readOut(`posts/${slug}/index.html`);
+    expect(locs).toContain(loc);
+    expect(canonicalsOf(html)).toEqual([loc]);
+    expect(html).toMatch(new RegExp(`<time[^>]*datetime="${date}"`, "i"));
+    expect(html).not.toMatch(/substackcdn\.com|substack-post-media/);
   });
 });
 
@@ -58,7 +104,7 @@ describe("migrated images", () => {
   const pages = readdirSync(join(OUT, "posts"), { withFileTypes: true })
     .filter((d) => d.isDirectory())
     .map((d) => `posts/${d.name}/index.html`);
-  test("every post page exists", () => expect(pages.length).toBe(46));
+  test("every post page exists", () => expect(pages.length).toBe(57));
   test.each(pages)("%s: every <img> is served from this site", (rel) => {
     const srcs = [...readOut(rel).matchAll(/<img\b[^>]*?\ssrc="([^"]*)"/g)].map((m) => m[1]);
     for (const src of srcs) expect(src).toMatch(/^\/(?!\/)/);
