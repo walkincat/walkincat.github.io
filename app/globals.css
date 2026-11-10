@@ -220,7 +220,7 @@ a:hover { color: var(--wc-lav-800); text-decoration-thickness: 2px; }
 .wc-post__title { font-size: var(--wc-fs-h1); }
 .wc-post__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--wc-space-2) var(--wc-space-3); margin-top: var(--wc-space-4); }
 .wc-post__date { font-family: var(--wc-font-mono); font-size: var(--wc-fs-xs); color: var(--wc-ink-muted); }
-.wc-post__summary { margin-top: var(--wc-space-5); font-size: calc(var(--wc-fs-body) + 1px); color: var(--wc-ink-muted); line-height: 1.7; }
+.wc-post__summary { margin-top: var(--wc-space-5); font-size: var(--wc-fs-small); color: var(--wc-ink-muted); line-height: 1.65; }
 .wc-post__cover { margin-top: var(--wc-space-6); }
 .wc-prose { margin-top: var(--wc-space-7); font-family: var(--wc-font-prose); }
 .wc-prose > * + * { margin-top: var(--wc-space-4); }

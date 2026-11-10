@@ -7,6 +7,7 @@
 // and when the cat image fails to load it is removed from the page.
 // On post pages (QA item in brackets):
 // - [L2] h1 / h2 / h3 line heights 1.35 / 1.4 / 1.45
+// - [L3] the summary is the small size, below the body size
 // Usage: bun scripts/shoot.ts --base http://localhost:4173 --dir shots [--page name=/path/ ...]
 import { mkdirSync } from "node:fs";
 import { join } from "node:path";
@@ -64,6 +65,17 @@ async function postChecks(tab: Page): Promise<string[]> {
     for (const [sel, want] of [[".wc-post__title", 1.35], [".wc-prose h2", 1.4], [".wc-prose h3", 1.45]] as const) {
       const el = first(sel);
       if (el && !near(ratio(el), want)) fails.push(`L2 ${sel} line-height ${ratio(el).toFixed(3)} != ${want}`);
+    }
+
+    // L3: summary is the small size (15px phone, 16px desktop), line-height 1.65, never larger than the body.
+    const summary = first(".wc-post__summary");
+    const body = first(".wc-prose p");
+    if (summary && body) {
+      const s = parseFloat(cs(summary).fontSize);
+      const b = parseFloat(cs(body).fontSize);
+      if (!(s < b)) fails.push(`L3 summary ${s}px is not smaller than body ${b}px`);
+      if (s < 15 || s > 16) fails.push(`L3 summary ${s}px outside 15-16px`);
+      if (!near(ratio(summary), 1.65)) fails.push(`L3 summary line-height ${ratio(summary).toFixed(3)} != 1.65`);
     }
 
     return fails;
