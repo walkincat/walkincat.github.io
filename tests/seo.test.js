@@ -72,3 +72,12 @@ describe("home OG image", () => {
     expect(pngSize(readFileSync(file))).toEqual({ width: 1200, height: 630 });
   });
 });
+
+describe("Search Console verification", () => {
+  test("home page has the google-site-verification meta exactly once", () => {
+    const html = readOut("index.html");
+    const tag = /<meta name="google-site-verification" content="g21_amVh1pZkMW_AlQEm8KzOn-uufPSggpf3V6hu9CQ"\/?>/g;
+    expect(html.match(tag)?.length).toBe(1);
+    expect(html.match(/<meta name="google-site-verification"/g)?.length).toBe(1);
+  });
+});
