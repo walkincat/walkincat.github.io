@@ -9,7 +9,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: SITE_NAME,
   description: SITE_TAGLINE,
-  icons: { icon: "/avatar.jpg", apple: "/avatar.jpg" },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "16x16 32x32 48x48" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
+  },
   verification: { google: "g21_amVh1pZkMW_AlQEm8KzOn-uufPSggpf3V6hu9CQ" },
 };
 
