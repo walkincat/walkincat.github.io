@@ -6,6 +6,15 @@
   font-style: normal;
   font-display: swap;
 }
+/* Glyphs that only appear in post bodies. Listed after "Noto Sans TC" in --wc-font-prose, so the browser
+   downloads it only on pages with characters the main subset lacks (see scripts/subset-fonts.ts). */
+@font-face {
+  font-family: "Noto Sans TC Prose";
+  src: url("/fonts/noto-sans-tc-prose.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
 @font-face {
   font-family: "Nunito";
   src: url("/fonts/nunito-800.woff2") format("woff2");
@@ -40,7 +49,6 @@
      so the CJK font download does not compete with the first paint and the LCP image on slow connections. */
   --wc-font-body: "PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", system-ui, sans-serif;
   --wc-font-display: "Nunito", "PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", system-ui, sans-serif;
-  /* Post bodies use system CJK fonts so the self-hosted Noto Sans TC subset stays small (see scripts/subset-fonts.ts). */
   --wc-font-prose: "PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", system-ui, sans-serif;
   --wc-font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
@@ -77,6 +85,7 @@
 :root.wc-fonts {
   --wc-font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
   --wc-font-display: "Nunito", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --wc-font-prose: "Noto Sans TC", "Noto Sans TC Prose", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
 }
 
 @media (min-width: 768px) { :root { --wc-gutter: 24px; } }

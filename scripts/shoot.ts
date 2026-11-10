@@ -6,6 +6,7 @@
 // On pages with the skate cat (home, 404): the cat is visible and its box does not overlap any h1 or .wc-btn,
 // and when the cat image fails to load it is removed from the page.
 // On post pages (QA item in brackets):
+// - [L1] at 390, the post body is drawn with Noto Sans TC
 // - [L2] h1 / h2 / h3 line heights 1.35 / 1.4 / 1.45
 // - [L3] the summary is the small size, below the body size
 // - [L4] post navigation buttons: one full-width column on phones, one row from 768px
@@ -15,7 +16,7 @@
 import { mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { parseArgs } from "node:util";
-import { type Page, chromium } from "playwright";
+import { type BrowserContext, type Page, chromium } from "playwright";
 
 const { values } = parseArgs({
   options: {
@@ -123,6 +124,32 @@ async function postChecks(tab: Page): Promise<string[]> {
   });
 }
 
+/** L1: the post body is drawn with Noto Sans TC (code may use the mono font; emoji may use an emoji font). */
+async function proseFontCheck(context: BrowserContext, tab: Page): Promise<string[]> {
+  const cdp = await context.newCDPSession(tab);
+  await cdp.send("DOM.enable");
+  await cdp.send("CSS.enable");
+  const { root } = await cdp.send("DOM.getDocument", { depth: -1 });
+  const { nodeIds } = await cdp.send("DOM.querySelectorAll", {
+    nodeId: root.nodeId,
+    selector: ".wc-prose :is(p, li, h2, h3, blockquote, dt, dd, figcaption)",
+  });
+  const glyphs = new Map<string, number>();
+  for (const nodeId of nodeIds) {
+    const { fonts } = await cdp.send("CSS.getPlatformFontsForNode", { nodeId });
+    for (const f of fonts) glyphs.set(f.familyName, (glyphs.get(f.familyName) ?? 0) + f.glyphCount);
+  }
+  await cdp.detach();
+  // Noto Sans TC itself has no glyph for a few simplified or variant characters used in the posts (稳 爲 热 赛),
+  // so those fall back to a system font. Before the fix every body glyph was a system font.
+  const other = [...glyphs].filter(([family]) => !/^Noto Sans TC|IBM Plex Mono|Emoji/.test(family));
+  const total = [...glyphs.values()].reduce((a, b) => a + b, 0);
+  const fallback = other.reduce((sum, [, n]) => sum + n, 0);
+  return fallback > total * 0.005
+    ? [`L1 ${fallback} of ${total} post body glyphs not in Noto Sans TC: ${other.map(([f, n]) => `${f}=${n}`).join(", ")}`]
+    : [];
+}
+
 mkdirSync(values.dir!, { recursive: true });
 const browser = await chromium.launch(values.channel ? { channel: values.channel } : {});
 let failed = false;
@@ -159,7 +186,7 @@ try {
           fontsOk,
         };
       });
-      const postFails = await postChecks(tab);
+      const postFails = [...(await postChecks(tab)), ...(vp.width === 390 ? await proseFontCheck(context, tab) : [])];
       // With isMobile, content wider than the viewport also widens the layout viewport, so innerWidth grows
       // with it (390 -> 638). Compare against the configured viewport width too, not only innerWidth.
       const catOk = !page.cat || (m.catVisible && m.overlaps === 0);

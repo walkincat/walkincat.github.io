@@ -42,7 +42,7 @@ The build downloads three OFL source fonts from a pinned `google/fonts` commit (
 ```sh
 bun install
 bun run dev          # local dev server
-bun run build        # velite -> next build -> font subsetting (writes out/)
+bun run build        # velite -> next build -> font subsetting (writes out/; post-body-only characters go to a second Noto Sans TC file)
 bun run typecheck
 bun test             # needs a build first; checks out/
 bun run linkcheck    # internal links and anchors; add `-- --external` to fetch external links
