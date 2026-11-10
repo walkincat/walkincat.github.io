@@ -42,7 +42,7 @@ The build downloads three OFL source fonts from a pinned `google/fonts` commit (
 ```sh
 bun install
 bun run dev          # local dev server
-bun run build        # velite -> next build -> font subsetting (writes out/)
+bun run build        # velite -> next build -> font subsetting (writes out/; post-body-only characters go to a second Noto Sans TC file)
 bun run typecheck
 bun test             # needs a build first; checks out/
 bun run linkcheck    # internal links and anchors; add `-- --external` to fetch external links
@@ -84,7 +84,7 @@ Images live next to the posts in `content/img/<folder>/` (WebP, at most 1200 px 
 
 ## Skate cat (墨鏡直排輪貓)
 
-`public/ip-skate-cat.webp` (560×791, from the 785×1108 PNG of the 2023 brand CI) is decoration on the home hero (bottom-right corner on desktop, peeking in from the right edge below 1200 px) and on the 404 page. It is rendered by `components/IpCat.tsx` with `alt=""` and `aria-hidden="true"`; if the image fails to load, the component removes it. If the cat is made larger or moved, re-run `scripts/shoot.ts`: it fails when the cat overlaps the headline or a button.
+`public/ip-skate-cat.webp` (560×791, from the 785×1108 PNG of the 2023 brand CI) is decoration on the home hero (bottom-right corner on desktop, peeking in from the right edge below 1200 px) and on the 404 page. It is rendered by `components/IpCat.tsx` with `alt=""` and `aria-hidden="true"`; if the image fails to load, the component removes it. Without JavaScript nothing can remove it, so CSS gives the cat no height of its own until the image has loaded (`aspect-ratio: auto`); a failed image is 0 px tall and leaves no gap. The inline head script in `app/layout.tsx` adds `html.wc-js`, and only then does the cat reserve its 560:791 box before loading. If the cat is made larger or moved, re-run `scripts/shoot.ts`: it fails when the cat overlaps the headline or a button.
 
 ## Sharing links
 
@@ -114,5 +114,5 @@ Links shared on social media use UTM parameters: see [docs/utm.md](docs/utm.md).
 - build, typecheck and tests
 - link check (external links that only appear in migrated post bodies are reported as warnings: some 2021–2023 sources are gone)
 - OG regeneration (size check via `scripts/png-size.ts`)
-- Playwright layout check (`scripts/shoot.ts`): no horizontal scroll at 320, 360, 390 and 1440 px widths on the home page, the 404 page and the post pages; on the home and 404 pages the skate cat is visible, does not overlap the `h1` or any button, and is removed when its image fails to load
+- Playwright layout check (`scripts/shoot.ts`): no horizontal scroll at 320, 360, 390, 768, 1024 and 1440 px widths on the home page, the 404 page, the list and the post pages; on the home and 404 pages the skate cat is visible, does not overlap the `h1` or any button, is removed when its image fails to load, and takes no space when the image fails with JavaScript off; on post pages the typography, navigation, cover and code block checks listed at the top of the script
 - Lighthouse mobile: performance and SEO must both be ≥ 0.9

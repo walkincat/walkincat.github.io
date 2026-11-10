@@ -6,6 +6,15 @@
   font-style: normal;
   font-display: swap;
 }
+/* Glyphs that only appear in post bodies. Listed after "Noto Sans TC" in --wc-font-prose, so the browser
+   downloads it only on pages with characters the main subset lacks (see scripts/subset-fonts.ts). */
+@font-face {
+  font-family: "Noto Sans TC Prose";
+  src: url("/fonts/noto-sans-tc-prose.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
 @font-face {
   font-family: "Nunito";
   src: url("/fonts/nunito-800.woff2") format("woff2");
@@ -40,7 +49,6 @@
      so the CJK font download does not compete with the first paint and the LCP image on slow connections. */
   --wc-font-body: "PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", system-ui, sans-serif;
   --wc-font-display: "Nunito", "PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", system-ui, sans-serif;
-  /* Post bodies use system CJK fonts so the self-hosted Noto Sans TC subset stays small (see scripts/subset-fonts.ts). */
   --wc-font-prose: "PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", system-ui, sans-serif;
   --wc-font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
@@ -77,6 +85,7 @@
 :root.wc-fonts {
   --wc-font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
   --wc-font-display: "Nunito", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --wc-font-prose: "Noto Sans TC", "Noto Sans TC Prose", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
 }
 
 @media (min-width: 768px) { :root { --wc-gutter: 24px; } }
@@ -100,6 +109,8 @@ img, svg { display: block; max-width: 100%; }
 img { height: auto; }
 
 h1, h2, h3 { line-height: 1.35; margin: 0; font-weight: 700; text-wrap: balance; }
+h2 { line-height: 1.4; }
+h3 { line-height: 1.45; }
 p { margin: 0; }
 
 a { color: var(--wc-lav-700); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
@@ -218,7 +229,7 @@ a:hover { color: var(--wc-lav-800); text-decoration-thickness: 2px; }
 .wc-post__title { font-size: var(--wc-fs-h1); }
 .wc-post__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--wc-space-2) var(--wc-space-3); margin-top: var(--wc-space-4); }
 .wc-post__date { font-family: var(--wc-font-mono); font-size: var(--wc-fs-xs); color: var(--wc-ink-muted); }
-.wc-post__summary { margin-top: var(--wc-space-5); font-size: calc(var(--wc-fs-body) + 1px); color: var(--wc-ink-muted); line-height: 1.7; }
+.wc-post__summary { margin-top: var(--wc-space-5); font-size: var(--wc-fs-small); color: var(--wc-ink-muted); line-height: 1.65; }
 .wc-post__cover { margin-top: var(--wc-space-6); }
 .wc-prose { margin-top: var(--wc-space-7); font-family: var(--wc-font-prose); }
 .wc-prose > * + * { margin-top: var(--wc-space-4); }
@@ -230,7 +241,8 @@ a:hover { color: var(--wc-lav-800); text-decoration-thickness: 2px; }
 .wc-prose code { font-family: var(--wc-font-mono); font-size: 0.88em; background: var(--wc-lav-100); padding: 1px 6px; border-radius: 6px; word-break: break-all; }
 .wc-prose p { word-break: normal; }
 /* Long code lines scroll inside the block instead of widening the page on phones. */
-.wc-prose pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.wc-prose pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; background: var(--wc-lav-100); border-radius: var(--wc-radius-sm); padding: var(--wc-space-4); }
+.wc-prose pre code { background: transparent; padding: 0; border-radius: 0; word-break: normal; }
 
 .wc-term { background: var(--wc-lav-100); border-radius: var(--wc-radius-md); padding: var(--wc-space-4) var(--wc-space-5); }
 .wc-term__label { display: inline-flex; align-items: center; gap: var(--wc-space-1); font-size: var(--wc-fs-xs); font-weight: 700; color: var(--wc-lav-700); }
@@ -255,6 +267,7 @@ a:hover { color: var(--wc-lav-800); text-decoration-thickness: 2px; }
 .wc-disclaimer strong { color: var(--wc-ink); }
 
 .wc-postnav { display: flex; flex-wrap: wrap; gap: var(--wc-space-3); margin-top: var(--wc-space-6); }
+@media (max-width: 767px) { .wc-postnav { flex-direction: column; } }
 
 /* Footer */
 .wc-footer { background: var(--wc-ink); color: var(--wc-paper); padding-block: var(--wc-space-7); margin-top: var(--wc-space-8); }
@@ -334,6 +347,8 @@ a:hover { color: var(--wc-lav-800); text-decoration-thickness: 2px; }
 
 /* Real cover images. */
 .wc-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Single post: the whole cover card is shown (weekly cards carry their credit line at the bottom); the 16:9 box stays and lav-100 fills the sides. */
+.wc-post__cover img { object-fit: contain; }
 
 /* Markdown blockquote inside posts. */
 .wc-prose blockquote { margin: 0; padding: var(--wc-space-3) var(--wc-space-4); border-left: 4px solid var(--wc-lav-300); background: var(--wc-surface); border-radius: 0 var(--wc-radius-sm) var(--wc-radius-sm) 0; }
@@ -344,10 +359,16 @@ a:hover { color: var(--wc-lav-800); text-decoration-thickness: 2px; }
 .wc-hero__ip { position: absolute; right: -36px; bottom: var(--wc-space-3); width: 96px; height: auto; transform: rotate(-8deg); pointer-events: none; }
 @media (min-width: 1200px) { .wc-hero__ip { right: max(var(--wc-gutter), calc((100% - 1200px) / 2)); bottom: var(--wc-space-5); width: 200px; transform: none; } }
 
+/* Without JavaScript nothing removes a cat whose image failed, so its height comes only from a loaded image
+   (a failed one is 0 tall and leaves no gap). With JavaScript (html.wc-js) the box is reserved from the
+   width/height ratio, and IpCat removes the element if the image fails. */
+.wc-ip { aspect-ratio: auto; }
+.wc-js .wc-ip { aspect-ratio: auto 560 / 791; }
+
 /* 404 page. */
 .wc-404 { padding: var(--wc-space-7) var(--wc-gutter) var(--wc-space-8); }
 .wc-404__inner { display: grid; justify-items: center; text-align: center; max-width: 28em; margin-inline: auto; }
-.wc-404__cat { width: 210px; height: auto; aspect-ratio: 560 / 791; }
+.wc-404__cat { width: 210px; height: auto; }
 .wc-404__title { margin-top: var(--wc-space-6); font-size: var(--wc-fs-h1); word-break: keep-all; overflow-wrap: anywhere; }
 .wc-404__lead { margin-top: var(--wc-space-4); color: var(--wc-ink-muted); line-height: 1.75; }
 .wc-404__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--wc-space-3); margin-top: var(--wc-space-6); }

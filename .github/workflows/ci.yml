@@ -39,7 +39,7 @@ jobs:
         run: |
           bun scripts/og.ts --out /tmp/og-home.png
           bun scripts/png-size.ts /tmp/og-home.png --expect 1200x630
-      - name: Layout check (no horizontal scroll at 320/360/390/1440, headline and subtitle wrapping, skate cat not over h1 or buttons)
+      - name: Layout check (no horizontal scroll at 320/360/390/768/1024/1440, headline and subtitle wrapping, skate cat not over h1 or buttons, post page checks)
         run: |
           bun scripts/serve.ts out &
           for _ in $(seq 1 20); do curl -fs -o /dev/null http://localhost:4173/ && break; sleep 0.5; done

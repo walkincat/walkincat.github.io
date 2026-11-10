@@ -2,10 +2,11 @@
 // in the exported HTML, and write them to out/fonts/ (paths match app/globals.css
 // and the preload links in app/layout.tsx).
 //
-// Post bodies (.wc-prose) use the system CJK fonts (--wc-font-prose in app/globals.css),
-// so their text is left out of the Noto Sans TC subset. With 46 migrated posts the body
-// text alone pushed the subset past 500 KiB and mobile Lighthouse performance below 90.
-// <script> contents (the RSC payload repeats the post bodies) are left out for the same reason.
+// Post bodies (.wc-prose) are split off: characters that appear only in post bodies go to a second
+// file, noto-sans-tc-prose.woff2 ("Noto Sans TC Prose", after "Noto Sans TC" in --wc-font-prose), which
+// the browser fetches only on pages that need one of them. With 46 migrated posts the body text in a
+// single file pushed it past 500 KiB and mobile Lighthouse performance below 90 on every page.
+// <script> contents (the RSC payload repeats the post bodies) are left out.
 import { mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import { join, relative } from "node:path";
 import subsetFont from "subset-font";
@@ -57,12 +58,17 @@ if (files.length === 0) throw new Error("no HTML in out/ — run next build firs
 // Every printable ASCII character is always kept so English text and digits never fall back.
 const ascii = Array.from({ length: 95 }, (_, i) => String.fromCharCode(32 + i)).join("");
 const used = new Set<string>(ascii);
+const proseOnly = new Set<string>();
 for (const file of files) {
-  const html = stripProse(readFileSync(file, "utf8").replace(/<script\b[\s\S]*?<\/script>/g, ""));
-  for (const ch of decodeEntities(html)) {
+  const html = readFileSync(file, "utf8").replace(/<script\b[\s\S]*?<\/script>/g, "");
+  for (const ch of decodeEntities(stripProse(html))) {
     if (ch.codePointAt(0)! > 0x7f) used.add(ch);
   }
+  for (const ch of decodeEntities(html)) {
+    if (ch.codePointAt(0)! > 0x7f) proseOnly.add(ch);
+  }
 }
+for (const ch of used) proseOnly.delete(ch);
 const text = [...used].join("");
 
 const jobs = [
@@ -70,6 +76,12 @@ const jobs = [
     out: "noto-sans-tc.woff2",
     font: SOURCE_FONTS.notoSansTC,
     text,
+    axes: { wght: { min: 400, max: 700 } },
+  },
+  {
+    out: "noto-sans-tc-prose.woff2",
+    font: SOURCE_FONTS.notoSansTC,
+    text: [...proseOnly].join("") || " ",
     axes: { wght: { min: 400, max: 700 } },
   },
   { out: "nunito-800.woff2", font: SOURCE_FONTS.nunito, text: ascii, axes: { wght: 800 } },
@@ -87,4 +99,4 @@ for (const job of jobs) {
   writeFileSync(target, subset);
   console.log(`[fonts] ${relative(OUT, target)} ${(subset.length / 1024).toFixed(1)} KiB`);
 }
-console.log(`[fonts] ${used.size} unique characters from ${files.length} HTML files`);
+console.log(`[fonts] ${used.size} unique characters outside post bodies, ${proseOnly.size} more only in post bodies, from ${files.length} HTML files`);
