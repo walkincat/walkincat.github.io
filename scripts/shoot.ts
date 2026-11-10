@@ -9,6 +9,7 @@
 // - [L2] h1 / h2 / h3 line heights 1.35 / 1.4 / 1.45
 // - [L3] the summary is the small size, below the body size
 // - [L4] post navigation buttons: one full-width column on phones, one row from 768px
+// - [L5] the post cover box is 16:9 and the cover image is not cropped
 // Usage: bun scripts/shoot.ts --base http://localhost:4173 --dir shots [--page name=/path/ ...]
 import { mkdirSync } from "node:fs";
 import { join } from "node:path";
@@ -89,6 +90,24 @@ async function postChecks(tab: Page): Promise<string[]> {
         if (rows !== btns.length || btns.some((b) => Math.abs(b.width - navW) > 1))
           fails.push(`L4 ${btns.length} nav buttons in ${rows} rows, widths ${btns.map((b) => Math.round(b.width)).join("/")} of ${Math.round(navW)}`);
       } else if (rows !== 1) fails.push(`L4 ${btns.length} nav buttons in ${rows} rows`);
+    }
+
+    // L5: the cover box stays 16:9 (DESIGN §5.5) and the whole image is drawn inside it, nothing cropped.
+    const coverBox = first(".wc-post__cover");
+    const coverImg = first(".wc-post__cover img") as HTMLImageElement | null;
+    if (coverBox && coverImg && coverImg.naturalWidth > 0) {
+      const box = coverBox.getBoundingClientRect();
+      if (Math.abs(box.width / box.height - 16 / 9) > 0.02) fails.push(`L5 cover box ${box.width}x${box.height} is not 16:9`);
+      const img = coverImg.getBoundingClientRect();
+      const fit = cs(coverImg).objectFit;
+      const sx = img.width / coverImg.naturalWidth;
+      const sy = img.height / coverImg.naturalHeight;
+      const scale = fit === "contain" || fit === "scale-down" ? Math.min(sx, sy) : fit === "cover" ? Math.max(sx, sy) : fit === "none" ? 1 : NaN;
+      const drawnW = fit === "fill" ? img.width : coverImg.naturalWidth * scale;
+      const drawnH = fit === "fill" ? img.height : coverImg.naturalHeight * scale;
+      const distorted = fit === "fill" && Math.abs(sx - sy) > 0.01;
+      if (drawnW > img.width + 0.5 || drawnH > img.height + 0.5 || distorted || img.width > box.width + 0.5 || img.height > box.height + 0.5)
+        fails.push(`L5 cover image drawn ${drawnW.toFixed(0)}x${drawnH.toFixed(0)} (object-fit ${fit}) in ${img.width.toFixed(0)}x${img.height.toFixed(0)}: cropped or distorted`);
     }
 
     return fails;

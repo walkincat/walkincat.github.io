@@ -337,6 +337,8 @@ a:hover { color: var(--wc-lav-800); text-decoration-thickness: 2px; }
 
 /* Real cover images. */
 .wc-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Single post: the whole cover card is shown (weekly cards carry their credit line at the bottom); the 16:9 box stays and lav-100 fills the sides. */
+.wc-post__cover img { object-fit: contain; }
 
 /* Markdown blockquote inside posts. */
 .wc-prose blockquote { margin: 0; padding: var(--wc-space-3) var(--wc-space-4); border-left: 4px solid var(--wc-lav-300); background: var(--wc-surface); border-radius: 0 var(--wc-radius-sm) var(--wc-radius-sm) 0; }
