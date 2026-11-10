@@ -1,5 +1,6 @@
 // Layout check + screenshots with Playwright.
-// For each page and viewport: full-page screenshot, document.documentElement.scrollWidth vs innerWidth,
+// For each page and viewport: full-page screenshot, document.documentElement.scrollWidth vs innerWidth
+// (and innerWidth vs the configured viewport width),
 // and on the home page the headline line count and that no subtitle phrase wraps.
 // Usage: bun scripts/shoot.ts --base http://localhost:4173 --dir shots [--page name=/path/ ...]
 import { mkdirSync } from "node:fs";
@@ -16,7 +17,8 @@ const { values } = parseArgs({
   },
 });
 
-const pages = (values.page?.length ? values.page : ["index=/", "list=/posts/", "post=/posts/2023-June-W2/"]).map((p) => {
+// brc20 has a long <pre> line; it guards against code blocks widening the page on phones.
+const pages = (values.page?.length ? values.page : ["index=/", "list=/posts/", "post=/posts/2023-June-W2/", "brc20=/posts/brc20-ordinals/"]).map((p) => {
   const [name, path] = p.split("=");
   return { name, path };
 });
@@ -53,7 +55,9 @@ try {
           fontsOk,
         };
       });
-      const ok = res?.status() === 200 && m.scrollWidth <= m.innerWidth && (m.subtitlePhrasesOnOneLine ?? true) &&
+      // With isMobile, content wider than the viewport also widens the layout viewport, so innerWidth grows
+      // with it (390 -> 638). Compare against the configured viewport width too, not only innerWidth.
+      const ok = res?.status() === 200 && m.scrollWidth <= m.innerWidth && m.innerWidth === vp.width && (m.subtitlePhrasesOnOneLine ?? true) &&
         (m.headlineLines === null || m.headlineLines === (vp.mobile ? 2 : 1));
       if (!ok) failed = true;
       console.log(

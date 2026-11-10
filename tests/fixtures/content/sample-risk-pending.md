@@ -1,7 +1,7 @@
 ---
 title: 範例｜風險說明待補的文章
 date: 2026-11-01
-summary: 測試用範例：risk_note 為空時，頁面要顯示「待補」狀態。
+summary: 測試用範例：risk_note 為空時，頁面要顯示共用的「非投資建議」區塊。
 sample: true
 risk_note: ""
 ---

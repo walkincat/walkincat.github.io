@@ -50,6 +50,8 @@ bun run og           # regenerate public/og/home.png (needs `bunx playwright ins
 bun run preview      # wrangler pages dev out (local only, no login needed)
 ```
 
+With `--external`, a 403 from x.com, Instagram, Threads or YouTube and a 429 from Instagram are warnings, not broken links (these hosts block or rate-limit automated requests). A 429 from any other host still fails. The rules are in `scripts/link-rules.ts`.
+
 ## Content
 
 Posts are Markdown files in `content/*.md`. The file name is the URL slug: `content/foo.md` becomes `/posts/foo/`.
@@ -67,9 +69,11 @@ sample: true               # optional; marks the post as 範例 (sample)
 ---
 ```
 
-If `risk_note` is missing or empty, the post shows the 待補 (pending) risk block: a dashed box plus a 待補 badge. Risk text is never generated.
+If `risk_note` is missing or empty, the post page shows the shared plain-language "非投資建議" block (`components/NotAdviceNote.tsx`, one fixed sentence for every such post) Post lists show no risk badge. Article-specific risk text is never generated.
 
 `content/` holds the 46 posts migrated from the old Hexo blog (2021–2023), with their original dates. Old URLs were `/post/<slug>.html`; the slug is unchanged, so `/post/foo.html` is now `/posts/foo/`.
+
+It also holds 11 posts from the WalkinCat Substack (walkincat.substack.com, 2023), with their original dates (Taiwan time). The Substack weeklies from 2023-03-04 to 2023-06-17 are the same posts as the old-blog weeklies, so they were not added twice. The 2023 weeklies after that are `2023-June-W4` and `2023-July-W1`…`W5`. Images were downloaded into `content/img/` like the others; the canonical URL of each post is its page on this site.
 
 Images live next to the posts in `content/img/<folder>/` (WebP, at most 1200 px wide) and are referenced with relative paths. velite copies them to `/static/` at build time, so every image is served from this site. Do not link images from other sites.
 

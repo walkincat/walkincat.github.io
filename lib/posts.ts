@@ -22,10 +22,6 @@ export function formatDate(iso: string | undefined): string | undefined {
   return iso ? iso.slice(0, 10) : undefined;
 }
 
-export function isRiskPending(post: { risk_note: string[] }): boolean {
-  return post.risk_note.length === 0;
-}
-
 /** Rough reading time for Traditional Chinese text (~400 characters per minute). */
 export function readingMinutes(raw: string): number {
   const chars = raw.replace(/\s+/g, "").length;

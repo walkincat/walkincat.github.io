@@ -4,23 +4,15 @@
 // - With --external, every external http(s) link is fetched and must return < 400.
 //   Exception: links that only appear on post pages (/posts/<slug>/) come from the migrated archive
 //   (2021-2023) and some of those sites are gone. They are printed as warnings, not failures.
+// - Bot blocking is a warning, not a broken link: 403 from x.com / Instagram / Threads / YouTube, and
+//   429 from Instagram. A 429 from any other host is still an error. Rules: scripts/link-rules.ts.
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
+import { classifyExternalStatus } from "./link-rules";
 
 const OUT = join(import.meta.dir, "..", "out");
 const SITE = "https://walkincat.org";
 const checkExternal = process.argv.includes("--external");
-// Hosts that answer automated requests from CI IP ranges with 403 even when the page exists.
-// For these, 403 is reported as a warning instead of a failure; other errors still fail.
-const BOT_BLOCKING_HOSTS = new Set([
-  "x.com",
-  "instagram.com",
-  "www.instagram.com",
-  "threads.net",
-  "www.threads.net",
-  "youtube.com",
-  "www.youtube.com",
-]);
 
 function htmlFiles(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
@@ -93,11 +85,12 @@ if (checkExternal) {
       }
     }
     console.log(`[links] external ${status} ${href}`);
-    if (status === 403 && BOT_BLOCKING_HOSTS.has(new URL(href).hostname)) {
-      console.warn(`[links] warning: ${href} -> 403 (host blocks automated requests; not treated as broken)`);
+    const verdict = classifyExternalStatus(href, status);
+    if (verdict === "warn") {
+      console.warn(`[links] warning: ${href} -> ${status} (host blocks or rate-limits automated requests; not treated as broken)`);
       continue;
     }
-    if (status === 0 || status >= 400) {
+    if (verdict === "error") {
       const msg = `external ${href} -> ${status || "network error"} (from ${pages[0]})`;
       (pages.every(isPostPage) ? warnings : errors).push(msg);
     }

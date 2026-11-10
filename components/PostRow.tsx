@@ -1,10 +1,8 @@
 import Link from "next/link";
-import { formatDate, isRiskPending, type Post } from "@/lib/posts";
-import { PendingBadge } from "./RiskNote";
+import { formatDate, type Post } from "@/lib/posts";
 
 export function PostRow({ post }: { post: Post }) {
   const date = formatDate(post.date);
-  const pending = isRiskPending(post);
   return (
     <li className="wc-row">
       {date ? (
@@ -20,7 +18,6 @@ export function PostRow({ post }: { post: Post }) {
         </h3>
         {post.summary ? <p className="wc-row__summary">{post.summary}</p> : null}
         <div className="wc-row__line">
-          <div className="wc-badges">{pending ? <PendingBadge /> : null}</div>
           {post.sample ? <span className="wc-sample">範例</span> : null}
         </div>
       </div>
