@@ -12,7 +12,15 @@ const SITE = "https://walkincat.org";
 const checkExternal = process.argv.includes("--external");
 // Hosts that answer automated requests from CI IP ranges with 403 even when the page exists.
 // For these, 403 is reported as a warning instead of a failure; other errors still fail.
-const BOT_BLOCKING_HOSTS = new Set(["x.com"]);
+const BOT_BLOCKING_HOSTS = new Set([
+  "x.com",
+  "instagram.com",
+  "www.instagram.com",
+  "threads.net",
+  "www.threads.net",
+  "youtube.com",
+  "www.youtube.com",
+]);
 
 function htmlFiles(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {

@@ -15,17 +15,10 @@ export function Footer() {
             <ul className="wc-social">
               {SOCIAL_LINKS.map((link) => (
                 <li key={link.name}>
-                  {link.href ? (
-                    <a href={link.href} rel="noopener">
-                      <SocialIcon name={link.name} />
-                      {link.name}
-                    </a>
-                  ) : (
-                    <span className="wc-social__todo">
-                      <SocialIcon name={link.name} />
-                      {link.name} <small>連結待補</small>
-                    </span>
-                  )}
+                  <a href={link.href} rel="me noopener">
+                    <SocialIcon name={link.name} />
+                    {link.name}
+                  </a>
                 </li>
               ))}
             </ul>

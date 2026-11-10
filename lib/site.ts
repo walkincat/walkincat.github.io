@@ -15,14 +15,14 @@ export function absoluteUrl(path: string): string {
   return new URL(path, SITE_URL).toString();
 }
 
-export type SocialLink = { name: string; href: string | null };
+export type SocialLink = { name: string; href: string };
 
-// Telegram URLs come from the previous README of this repository.
-// X is confirmed. Instagram and Threads are unconfirmed and render as "連結待補" until a real URL is set.
+// Official WalkinCat accounts. Telegram URLs come from the previous README of this repository.
 export const SOCIAL_LINKS: SocialLink[] = [
   { name: "Telegram 社群", href: "https://t.me/walkincat" },
   { name: "Telegram 頻道", href: "https://t.me/walkincat2020" },
-  { name: "Instagram", href: null }, // TODO: official URL
-  { name: "Threads", href: null }, // TODO: official URL
+  { name: "Instagram", href: "https://www.instagram.com/walkincat2020/" },
+  { name: "Threads", href: "https://www.threads.net/@walkincat2020" },
+  { name: "YouTube", href: "https://www.youtube.com/@walkincat2020" },
   { name: "X", href: "https://x.com/WalkinCatorg" },
 ];

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { readdirSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { OUT, readOut } from "./helpers.js";
 
@@ -78,8 +78,26 @@ describe("GitHub Pages artifact", () => {
 describe("footer social links", () => {
   const html = readOut("index.html");
   test("X links to the official account", () => expect(html).toContain('href="https://x.com/WalkinCatorg"'));
-  test("Instagram and Threads stay as 連結待補 until confirmed", () => {
-    expect(html).toMatch(/Instagram(<!-- -->)? <small>連結待補<\/small>/);
-    expect(html).toMatch(/Threads(<!-- -->)? <small>連結待補<\/small>/);
+  const SOCIAL_HREFS = [
+    "https://t.me/walkincat",
+    "https://t.me/walkincat2020",
+    "https://www.instagram.com/walkincat2020/",
+    "https://www.threads.net/@walkincat2020",
+    "https://www.youtube.com/@walkincat2020",
+    "https://x.com/WalkinCatorg",
+  ];
+  test("Instagram, Threads and YouTube link to the official accounts", () => {
+    expect(html).toContain('href="https://www.instagram.com/walkincat2020/"');
+    expect(html).toContain('href="https://www.threads.net/@walkincat2020"');
+    expect(html).toContain('href="https://www.youtube.com/@walkincat2020"');
+  });
+  test('every social link has rel="me noopener"', () => {
+    for (const href of SOCIAL_HREFS) expect(html).toContain(`<a href="${href}" rel="me noopener">`);
+  });
+  test("no page shows 連結待補", () => {
+    const walk = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(join(dir, e.name)) : [join(dir, e.name)]));
+    const pages = walk(OUT).filter((f) => f.endsWith(".html"));
+    expect(pages.length).toBeGreaterThan(0);
+    for (const f of pages) expect(readFileSync(f, "utf8")).not.toContain("連結待補");
   });
 });
