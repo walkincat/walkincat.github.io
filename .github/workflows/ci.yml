@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  pull_request:
+    # jq/** covers stacked PRs (e.g. PR2 is based on jq/walkincat-pr1).
+    branches: [main, "jq/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
+      - run: bun install --frozen-lockfile
+
+      - uses: actions/cache@v4
+        with:
+          path: .cache/fonts
+          key: source-fonts-${{ hashFiles('scripts/fonts.ts') }}
+
+      - name: Build
+        run: bun run build
+      - name: Typecheck
+        run: bun run typecheck
+      - name: Test (canonical == sitemap loc, 404 noindex without canonical, /news noindex, OG size)
+        run: bun test
+      - name: Link check (internal + external)
+        run: bun run linkcheck -- --external
+
+      - name: Install Chromium for Playwright
+        run: bunx playwright install --with-deps chromium
+      - name: OG image reproduces at 1200x630
+        run: |
+          bun scripts/og.ts --out /tmp/og-home.png
+          bun scripts/png-size.ts /tmp/og-home.png --expect 1200x630
+      - name: Layout check (no horizontal scroll at 390/360/1440, headline and subtitle wrapping)
+        run: |
+          bun scripts/serve.ts out &
+          for _ in $(seq 1 20); do curl -fs -o /dev/null http://localhost:4173/ && break; sleep 0.5; done
+          bun scripts/shoot.ts --base http://localhost:4173 --dir shots
+      - name: Lighthouse mobile (performance and SEO >= 0.9)
+        run: bunx lhci autorun
+      - name: Lighthouse scores
+        if: always()
+        run: |
+          bun -e 'const fs=require("fs");const d=".lighthouseci/reports";for(const f of fs.readdirSync(d).filter(f=>f.endsWith(".report.json")).sort()){const r=JSON.parse(fs.readFileSync(d+"/"+f));const c=r.categories;console.log(new URL(r.finalDisplayedUrl).pathname.padEnd(40),r.configSettings.formFactor,"performance",Math.round(c.performance.score*100),"seo",Math.round(c.seo.score*100))}'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shots-and-lighthouse
+          path: |
+            shots/
+            .lighthouseci/
+          if-no-files-found: ignore
+          include-hidden-files: true

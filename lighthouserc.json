@@ -1,0 +1,21 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "./out",
+      "url": [
+        "http://localhost/",
+        "http://localhost/posts/",
+        "http://localhost/posts/2023-June-W2/"
+      ],
+      "numberOfRuns": 3,
+      "settings": { "formFactor": "mobile", "chromeFlags": "--no-sandbox --headless=new" }
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": ["error", { "minScore": 0.9, "aggregationMethod": "median-run" }],
+        "categories:seo": ["error", { "minScore": 0.9, "aggregationMethod": "median-run" }]
+      }
+    },
+    "upload": { "target": "filesystem", "outputDir": "./.lighthouseci/reports" }
+  }
+}
