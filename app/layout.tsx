@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: SITE_NAME,
   description: SITE_TAGLINE,
   icons: { icon: "/avatar.jpg", apple: "/avatar.jpg" },
+  verification: { google: "g21_amVh1pZkMW_AlQEm8KzOn-uufPSggpf3V6hu9CQ" },
 };
 
 export const viewport: Viewport = {

@@ -328,9 +328,6 @@ a:hover { color: var(--wc-lav-800); text-decoration-thickness: 2px; }
 .wc-hero__sub { word-break: keep-all; overflow-wrap: normal; }
 .wc-hero__sub > span { display: inline-block; }
 
-/* Social links without a confirmed URL. */
-.wc-social__todo { display: inline-flex; align-items: center; gap: var(--wc-space-2); min-height: 44px; font-weight: 500; color: #dcdadc; }
-
 /* Placeholder page (/news). */
 .wc-placeholder { padding-block: var(--wc-space-8); }
 .wc-placeholder p { margin-top: var(--wc-space-3); color: var(--wc-ink-muted); }
