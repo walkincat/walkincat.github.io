@@ -10,6 +10,7 @@
 // - [L3] the summary is the small size, below the body size
 // - [L4] post navigation buttons: one full-width column on phones, one row from 768px
 // - [L5] the post cover box is 16:9 and the cover image is not cropped
+// - [P2] code blocks have one background; the code inside has none
 // Usage: bun scripts/shoot.ts --base http://localhost:4173 --dir shots [--page name=/path/ ...]
 import { mkdirSync } from "node:fs";
 import { join } from "node:path";
@@ -110,6 +111,14 @@ async function postChecks(tab: Page): Promise<string[]> {
         fails.push(`L5 cover image drawn ${drawnW.toFixed(0)}x${drawnH.toFixed(0)} (object-fit ${fit}) in ${img.width.toFixed(0)}x${img.height.toFixed(0)}: cropped or distorted`);
     }
 
+    // P2: a code block is one tinted block; the code inside it has no inline-code background or padding.
+    for (const code of document.querySelectorAll(".wc-prose pre code")) {
+      const pre = code.parentElement!;
+      const transparent = (c: string) => c === "rgba(0, 0, 0, 0)" || c === "transparent";
+      if (!transparent(cs(code).backgroundColor) || cs(code).paddingLeft !== "0px")
+        fails.push(`P2 pre code background ${cs(code).backgroundColor}, padding-left ${cs(code).paddingLeft}`);
+      if (transparent(cs(pre).backgroundColor)) fails.push("P2 pre has no background of its own");
+    }
     return fails;
   });
 }
