@@ -26,21 +26,20 @@ function pngChunks(buf) {
   return chunks;
 }
 
-/** Number of pixels with alpha < 255 in an 8-bit RGBA or RGB PNG. */
-function transparentPixels(buf) {
+/** Decodes an 8-bit RGB or RGBA PNG to { width, height, rgba }. RGB pixels get alpha 255. */
+function decodePng(buf) {
   const chunks = pngChunks(buf);
   const ihdr = chunks.find((c) => c.type === "IHDR").data;
   const [w, h, depth, color] = [ihdr.readUInt32BE(0), ihdr.readUInt32BE(4), ihdr[8], ihdr[9]];
-  if (chunks.some((c) => c.type === "tRNS")) return Infinity;
+  if (chunks.some((c) => c.type === "tRNS")) throw new Error("tRNS chunk is not supported");
   if (depth !== 8) throw new Error(`unsupported bit depth ${depth}`);
-  if (color === 2) return 0;
-  if (color !== 6) throw new Error(`unsupported color type ${color}`);
+  if (color !== 2 && color !== 6) throw new Error(`unsupported color type ${color}`);
   const raw = inflateSync(Buffer.concat(chunks.filter((c) => c.type === "IDAT").map((c) => c.data)));
-  const bpp = 4;
+  const bpp = color === 6 ? 4 : 3;
   const stride = w * bpp;
   const prev = new Uint8Array(stride);
   const row = new Uint8Array(stride);
-  let count = 0;
+  const rgba = new Uint8Array(w * h * 4);
   for (let y = 0; y < h; y++) {
     const base = y * (stride + 1);
     const filter = raw[base];
@@ -61,10 +60,50 @@ function transparentPixels(buf) {
       }
       row[x] = p & 255;
     }
-    for (let x = 3; x < stride; x += 4) if (row[x] < 255) count++;
+    for (let x = 0; x < w; x++) {
+      const o = (y * w + x) * 4;
+      rgba.set([row[x * bpp], row[x * bpp + 1], row[x * bpp + 2], bpp === 4 ? row[x * bpp + 3] : 255], o);
+    }
     prev.set(row);
   }
+  return { width: w, height: h, rgba };
+}
+
+/** Number of pixels with alpha < 255. */
+function transparentPixels(buf) {
+  const { rgba } = decodePng(buf);
+  let count = 0;
+  for (let i = 3; i < rgba.length; i += 4) if (rgba[i] < 255) count++;
   return count;
+}
+
+function icoImages(buf) {
+  return Array.from({ length: buf.readUInt16LE(4) }, (_, i) => {
+    const e = 6 + i * 16;
+    const off = buf.readUInt32LE(e + 12);
+    return { size: buf[e] || 256, png: buf.subarray(off, off + buf.readUInt32LE(e + 8)) };
+  });
+}
+
+/**
+ * Bounding box of the cat, as the free columns/rows between it and each edge. A pixel is cat when it is not
+ * background: any alpha above 0 on the transparent icons, any colour other than `background` on opaque ones.
+ */
+function catMargins(buf, background) {
+  const { width: w, height: h, rgba } = decodePng(buf);
+  const isCat = (i) =>
+    background ? rgba[i] !== background[0] || rgba[i + 1] !== background[1] || rgba[i + 2] !== background[2] : rgba[i + 3] > 0;
+  let x0 = w, x1 = -1, y0 = h, y1 = -1;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      if (!isCat((y * w + x) * 4)) continue;
+      x0 = Math.min(x0, x);
+      x1 = Math.max(x1, x);
+      y0 = Math.min(y0, y);
+      y1 = Math.max(y1, y);
+    }
+  }
+  return { left: x0, right: w - 1 - x1, top: y0, bottom: h - 1 - y1 };
 }
 
 describe("icon links in the built HTML", () => {
@@ -147,5 +186,31 @@ describe("icon files", () => {
 
   test("apple-touch-icon.png has no transparent pixels", () => {
     expect(transparentPixels(readFileSync(join(OUT, "apple-touch-icon.png")))).toBe(0);
+  });
+});
+
+describe("cat placement in every icon", () => {
+  const ico = icoImages(readFileSync(join(OUT, "favicon.ico")));
+  const icons = [
+    ...ico.map(({ size, png }) => [`favicon.ico ${size}px`, png, null]),
+    ["icon-192.png", readFileSync(join(OUT, "icon-192.png")), null],
+    ["icon-512.png", readFileSync(join(OUT, "icon-512.png")), null],
+    ["apple-touch-icon.png", readFileSync(join(OUT, "apple-touch-icon.png")), [0xf8, 0xf8, 0xf8]],
+  ];
+
+  test.each(icons)("%s: the cat clears all four edges by at least 1px", (_, png, background) => {
+    const m = catMargins(png, background);
+    expect(Math.min(m.left, m.right, m.top, m.bottom)).toBeGreaterThanOrEqual(1);
+  });
+
+  // A head cut off at one side (the right whiskers, before) leaves a wider margin on the other side.
+  test.each(icons)("%s: left and right margins differ by at most 1px", (_, png, background) => {
+    const m = catMargins(png, background);
+    expect(Math.abs(m.left - m.right)).toBeLessThanOrEqual(1);
+  });
+
+  test("favicon.ico 16px: the cat spans the full width inside a 1px margin", () => {
+    const m = catMargins(ico.find((i) => i.size === 16).png, null);
+    expect([m.left, m.right]).toEqual([1, 1]);
   });
 });
