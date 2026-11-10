@@ -47,6 +47,7 @@ bun run typecheck
 bun test             # needs a build first; checks out/
 bun run linkcheck    # internal links and anchors; add `-- --external` to fetch external links
 bun run og           # regenerate public/og/home.png (needs `bunx playwright install chromium`)
+bun run favicon      # regenerate favicon.ico, icon-192/512.png, apple-touch-icon.png (same Chromium)
 bun run preview      # wrangler pages dev out (local only, no login needed)
 ```
 
@@ -99,6 +100,10 @@ Links shared on social media use UTM parameters: see [docs/utm.md](docs/utm.md).
 ## OG image
 
 `public/og/home.png` (1200×630) is rendered from `og/og-template.html` by `scripts/og.ts` with Playwright. The PNG is committed so the Cloudflare Pages build does not need a browser. CI regenerates it to check that it still renders at 1200×630.
+
+## Favicon
+
+`public/favicon.ico` (16, 32, 48 px), `public/icon-192.png`, `public/icon-512.png` and `public/apple-touch-icon.png` (180×180, opaque, `--wc-paper` #f8f8f8 background) are the cat head cut from `public/ip-skate-cat.webp` by `scripts/make-favicon.ts`: ears to chin with the sunglasses and the white sticker outline, no body. The crop box and the chin curve are constants at the top of the script. Below the chin the script draws a white band with a dark outer line, so the head is closed like the rest of the sticker. Chromium (through Playwright) only decodes the WebP and resamples; PNG and ICO are encoded in the script. The files are committed, so the build does not run it. `app/layout.tsx` points `icons` at these files; `public/avatar.jpg` is still the logo image in the header, the home hero and the empty state. `tests/favicon.test.js` checks the links and the files.
 
 ## CI
 
