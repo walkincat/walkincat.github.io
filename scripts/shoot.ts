@@ -1,9 +1,11 @@
 // Layout check + screenshots with Playwright.
 // For each page and viewport: full-page screenshot, document.documentElement.scrollWidth vs innerWidth
 // (and innerWidth vs the configured viewport width),
-// and on the home page the headline line count and that no subtitle phrase wraps.
+// and on the home page the headline line count (two lines on phones, one from 1024px; at 768px it may wrap after the comma)
+// and that no subtitle phrase wraps.
 // On pages with the skate cat (home, 404): the cat is visible and its box does not overlap any h1 or .wc-btn,
 // and when the cat image fails to load it is removed from the page.
+// - [L2] h1 / h2 / h3 line heights 1.35 / 1.4 / 1.45
 // Usage: bun scripts/shoot.ts --base http://localhost:4173 --dir shots [--page name=/path/ ...]
 import { mkdirSync } from "node:fs";
 import { join } from "node:path";
@@ -20,9 +22,20 @@ const { values } = parseArgs({
 });
 
 // brc20 has a long <pre> line; it guards against code blocks widening the page on phones.
+// april-w3 has h2, h3 and both 上一篇 and 下一篇; june-w3 has a weekly cover card with a credit line at the bottom.
 // "404" is any missing path; the static server answers it with out/404.html and status 404.
 const pages = (
-  values.page?.length ? values.page : ["index=/", "404=/no-such-page/", "list=/posts/", "post=/posts/2023-June-W2/", "brc20=/posts/brc20-ordinals/"]
+  values.page?.length
+    ? values.page
+    : [
+        "index=/",
+        "404=/no-such-page/",
+        "list=/posts/",
+        "post=/posts/2023-June-W2/",
+        "brc20=/posts/brc20-ordinals/",
+        "april-w3=/posts/2023-April-W3/",
+        "june-w3=/posts/2023-June-W3/",
+      ]
 ).map((p) => {
   const [name, path] = p.split("=");
   return { name, path, status: name === "404" ? 404 : 200, cat: name === "index" || name === "404" };
@@ -31,6 +44,8 @@ const viewports = [
   { name: "320x568", width: 320, height: 568, dpr: 2, mobile: true },
   { name: "390x844", width: 390, height: 844, dpr: 2, mobile: true },
   { name: "360x800", width: 360, height: 800, dpr: 2, mobile: true },
+  { name: "768x1024", width: 768, height: 1024, dpr: 2, mobile: false },
+  { name: "1024x768", width: 1024, height: 768, dpr: 1, mobile: false },
   { name: "1440x900", width: 1440, height: 900, dpr: 1, mobile: false },
 ];
 
@@ -74,7 +89,7 @@ try {
       // with it (390 -> 638). Compare against the configured viewport width too, not only innerWidth.
       const catOk = !page.cat || (m.catVisible && m.overlaps === 0);
       const ok = res?.status() === page.status && catOk && m.scrollWidth <= m.innerWidth && m.innerWidth === vp.width && (m.subtitlePhrasesOnOneLine ?? true) &&
-        (m.headlineLines === null || m.headlineLines === (vp.mobile ? 2 : 1));
+        (m.headlineLines === null || (vp.width < 768 ? m.headlineLines === 2 : vp.width < 1024 ? m.headlineLines <= 2 : m.headlineLines === 1));
       if (!ok) failed = true;
       console.log(
         `[shoot] ${ok ? "ok  " : "FAIL"} ${page.name.padEnd(13)} ${vp.name.padEnd(9)} status=${res?.status()} scrollWidth=${m.scrollWidth} innerWidth=${m.innerWidth}` +
