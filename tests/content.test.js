@@ -81,9 +81,9 @@ describe("not-advice block shows exactly when risk_note is empty", () => {
     const slug = f.replace(/\.md$/, "");
     return { slug, empty: emptyRisk(readFileSync(join(CONTENT, f), "utf8")), html: readOut(`posts/${slug}/index.html`) };
   });
-  test("48 posts have an empty risk_note (37 old-blog + 11 Substack), 9 keep their own", () => {
-    expect(rows.filter((r) => r.empty).length).toBe(48);
-    expect(rows.filter((r) => !r.empty).length).toBe(9);
+  test("44 posts have an empty risk_note, 13 have one (9 legacy + 4 quoted from the body)", () => {
+    expect(rows.filter((r) => r.empty).length).toBe(44);
+    expect(rows.filter((r) => !r.empty).length).toBe(13);
   });
   test.each(rows.map((r) => [r.slug, r]))("%s", (_slug, r) => {
     expect(r.html.includes('data-risk="not-advice"')).toBe(r.empty);

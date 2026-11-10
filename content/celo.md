@@ -2,7 +2,8 @@
 title: "工商文章 | 集穩定幣與公鏈於一體的 Celo，會成為下一個 Terra 嗎？"
 date: 2021-11-23
 summary: "11 月 10 日晚間，Terra 社區通過了一項銷毀約 8870 萬個價值約 45 億美元的 LUNA 代幣以及鑄造約 400 萬至 500 萬美元的 UST 的提案，將進一步推動 Terra 專案的發展。"
-risk_note: []
+risk_note:
+  - "本文內容僅代表 Footprint 的觀點，僅供參考和資訊，不構成任何投資建議。"
 ---
 
 撰文：Footprint分析師Sabrina

@@ -2,7 +2,10 @@
 title: "探索 BRC20：比特幣區塊鏈上的新代幣標準與 Ordinals 協議，將以太坊的代幣功能帶入比特幣世界！"
 date: 2023-05-16
 summary: "要了解 BRC20 之前，我們必須先了解什麼是 Ordinals protocols，Ordinals 是比特幣的 NFT 實現協議，原先比特幣上是沒有智能合約的，因此要打造 NFT 是有難度的，但 Ordinals 協議允許用戶將 NFT…"
-risk_note: []
+risk_note:
+  - "這只是一個實驗，代幣本身並無價值與應用場景"
+  - "詐騙與資金盤層出不窮"
+  - "流動性不夠成熟，且操作的手續費很高"
 cover: ./img/2023-05-16-brc20-ordinals/cover.webp
 cover_alt: "探索 BRC20：比特幣區塊鏈上的新代幣標準與 Ordinals 協議，將以太坊的代幣功能帶入比特幣世界！ 的封面"
 ---
