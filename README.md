@@ -112,5 +112,5 @@ Links shared on social media use UTM parameters: see [docs/utm.md](docs/utm.md).
 - build, typecheck and tests
 - link check (external links that only appear in migrated post bodies are reported as warnings: some 2021–2023 sources are gone)
 - OG regeneration (size check via `scripts/png-size.ts`)
-- Playwright layout check (`scripts/shoot.ts`): no horizontal scroll at 320, 360, 390, 768, 1024 and 1440 px widths on the home page, the 404 page, the list and the post pages; on the home and 404 pages the skate cat is visible, does not overlap the `h1` or any button, and is removed when its image fails to load
+- Playwright layout check (`scripts/shoot.ts`): no horizontal scroll at 320, 360, 390, 768, 1024 and 1440 px widths on the home page, the 404 page, the list and the post pages; on the home and 404 pages the skate cat is visible, does not overlap the `h1` or any button, and is removed when its image fails to load; on post pages the typography, navigation, cover and code block checks listed at the top of the script
 - Lighthouse mobile: performance and SEO must both be ≥ 0.9

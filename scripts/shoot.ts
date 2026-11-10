@@ -5,12 +5,13 @@
 // and that no subtitle phrase wraps.
 // On pages with the skate cat (home, 404): the cat is visible and its box does not overlap any h1 or .wc-btn,
 // and when the cat image fails to load it is removed from the page.
+// On post pages (QA item in brackets):
 // - [L2] h1 / h2 / h3 line heights 1.35 / 1.4 / 1.45
 // Usage: bun scripts/shoot.ts --base http://localhost:4173 --dir shots [--page name=/path/ ...]
 import { mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { parseArgs } from "node:util";
-import { chromium } from "playwright";
+import { type Page, chromium } from "playwright";
 
 const { values } = parseArgs({
   options: {
@@ -49,6 +50,26 @@ const viewports = [
   { name: "1440x900", width: 1440, height: 900, dpr: 1, mobile: false },
 ];
 
+/** Post page checks. Each returns a list of failure messages (empty when the page passes). */
+async function postChecks(tab: Page): Promise<string[]> {
+  return tab.evaluate(() => {
+    const fails: string[] = [];
+    if (!document.querySelector(".wc-post")) return fails;
+    const cs = (el: Element) => getComputedStyle(el);
+    const ratio = (el: Element) => parseFloat(cs(el).lineHeight) / parseFloat(cs(el).fontSize);
+    const near = (a: number, b: number) => Math.abs(a - b) < 0.01;
+    const first = (sel: string) => document.querySelector(sel);
+
+    // L2: h1 1.35, h2 1.4, h3 1.45 (DESIGN §4 字級).
+    for (const [sel, want] of [[".wc-post__title", 1.35], [".wc-prose h2", 1.4], [".wc-prose h3", 1.45]] as const) {
+      const el = first(sel);
+      if (el && !near(ratio(el), want)) fails.push(`L2 ${sel} line-height ${ratio(el).toFixed(3)} != ${want}`);
+    }
+
+    return fails;
+  });
+}
+
 mkdirSync(values.dir!, { recursive: true });
 const browser = await chromium.launch(values.channel ? { channel: values.channel } : {});
 let failed = false;
@@ -85,17 +106,19 @@ try {
           fontsOk,
         };
       });
+      const postFails = await postChecks(tab);
       // With isMobile, content wider than the viewport also widens the layout viewport, so innerWidth grows
       // with it (390 -> 638). Compare against the configured viewport width too, not only innerWidth.
       const catOk = !page.cat || (m.catVisible && m.overlaps === 0);
       const ok = res?.status() === page.status && catOk && m.scrollWidth <= m.innerWidth && m.innerWidth === vp.width && (m.subtitlePhrasesOnOneLine ?? true) &&
-        (m.headlineLines === null || (vp.width < 768 ? m.headlineLines === 2 : vp.width < 1024 ? m.headlineLines <= 2 : m.headlineLines === 1));
+        (m.headlineLines === null || (vp.width < 768 ? m.headlineLines === 2 : vp.width < 1024 ? m.headlineLines <= 2 : m.headlineLines === 1)) && postFails.length === 0;
       if (!ok) failed = true;
       console.log(
         `[shoot] ${ok ? "ok  " : "FAIL"} ${page.name.padEnd(13)} ${vp.name.padEnd(9)} status=${res?.status()} scrollWidth=${m.scrollWidth} innerWidth=${m.innerWidth}` +
           (page.cat ? ` catVisible=${m.catVisible} catOverlaps=${m.overlaps}` : "") +
           (m.headlineLines !== null ? ` headlineLines=${m.headlineLines} subtitlePhrasesOnOneLine=${m.subtitlePhrasesOnOneLine}` : "") +
-          ` fonts=${m.fontsOk.join("/")}`,
+          ` fonts=${m.fontsOk.join("/")}` +
+          postFails.map((f) => `\n[shoot]      ${f}`).join(""),
       );
       await tab.screenshot({ path: join(values.dir!, `${page.name}-${vp.name}.png`), fullPage: true });
       if (page.path === "/") await tab.screenshot({ path: join(values.dir!, `${page.name}-${vp.name}-fold.png`) });
