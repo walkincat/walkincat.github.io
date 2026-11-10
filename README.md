@@ -72,6 +72,8 @@ sample: true               # optional; marks the post as 範例 (sample)
 
 If `risk_note` is missing or empty, the post page shows the shared plain-language "非投資建議" block (`components/NotAdviceNote.tsx`, one fixed sentence for every such post) Post lists show no risk badge. Article-specific risk text is never generated.
 
+A new `risk_note` item must be quoted word for word from the post body (whole sentences or list items; cutting is fine, rewording or adding is not). `tests/risk-note-excerpt.test.js` checks this after normalizing whitespace and Markdown/HTML marks (the rules are at the top of that file). The 9 older notes (bitgin, bitgin-move-brick-1/2/3, defichaindtoken, footprint, icovsnft, whalefin-2, woonetwork-campaign) are paraphrases; the test lists them and does not require them to match.
+
 `content/` holds the 46 posts migrated from the old Hexo blog (2021–2023), with their original dates. Old URLs were `/post/<slug>.html`; the slug is unchanged, so `/post/foo.html` is now `/posts/foo/`.
 
 It also holds 11 posts from the WalkinCat Substack (walkincat.substack.com, 2023), with their original dates (Taiwan time). The Substack weeklies from 2023-03-04 to 2023-06-17 are the same posts as the old-blog weeklies, so they were not added twice. The 2023 weeklies after that are `2023-June-W4` and `2023-July-W1`…`W5`. Images were downloaded into `content/img/` like the others; the canonical URL of each post is its page on this site.
