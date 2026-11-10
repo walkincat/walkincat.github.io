@@ -1,5 +1,6 @@
-// Crops the cat head (ears to chin, with the sunglasses and the white sticker outline) out of
-// public/ip-skate-cat.webp and writes the site icons:
+// Cuts the cat head (ears to chin, with the sunglasses, whiskers and the white sticker outline) out of
+// public/ip-skate-cat.webp, measures its bounding box and centres that box in each icon with equal margins.
+// It writes the site icons:
 //   public/favicon.ico          16, 32 and 48 px (PNG-encoded entries), transparent background
 //   public/icon-192.png         transparent background
 //   public/icon-512.png         transparent background
@@ -15,25 +16,34 @@ import { chromium } from "playwright";
 const ROOT = join(import.meta.dir, "..");
 const SRC = join(ROOT, "public", "ip-skate-cat.webp");
 
-// Crop box in source pixels (the WebP is 560x791): ears to chin, plus room for the closing band below.
-const CROP = { x: 26, y: 0, width: 524, height: 446 };
+// Source rows holding the head (the WebP is 560x791): ears to chin, plus room for the closing band below.
+// All 560 columns are kept, because the whiskers and the sticker outline reach x = 558. The icons are fitted to
+// the bounding box of the pixels left after the chin cut, not to this region.
+const CROP = { x: 0, y: 0, width: 560, height: 446 };
 // In the artwork the chin line is the top edge of the collar. It follows y = cy - k * (x - cx)^2
 // (source pixels, fitted to the bottom of that dark line). Everything below it is removed, and a white
 // sticker band with a dark outer line is drawn under it, so the head is closed like the rest of the sticker.
 const CHIN = { cx: 296, cy: 423.5, k: 0.001 };
 const BAND = { white: 15, outline: 4, color: [58, 58, 58] };
-// Share of the square icon taken by the longer side of the crop.
-const FILL = { transparent: 1, apple: 0.84 };
+// Margin between the head's bounding box and each edge of the icon, as a share of the icon size.
+// The box is centred, so the left and right margins are equal (and top and bottom), up to sub-pixel rounding.
+// The head is wider than tall, so the width sets the scale: head width = size * (1 - 2 * margin).
+//   16 px:  1/16 = 1 px, the least that still keeps every edge pixel clear
+//   32 px:  1/32 = 1 px
+//   48 px:  2/48 = 2 px
+//   192 px, 512 px: 0.05 (9.6 px, 25.6 px)
+//   apple-touch-icon 180 px: 0.08 (14.4 px), leaves the head clear of the iOS rounded corners
+const MARGIN = { ico16: 1 / 16, ico32: 1 / 32, ico48: 2 / 48, large: 0.05, apple: 0.08 };
 const APPLE_BG = "#f8f8f8";
 
-type Job = { name: string; size: number; fill: number; background: string | null };
+type Job = { name: string; size: number; margin: number; background: string | null };
 const JOBS: Job[] = [
-  { name: "ico-16", size: 16, fill: FILL.transparent, background: null },
-  { name: "ico-32", size: 32, fill: FILL.transparent, background: null },
-  { name: "ico-48", size: 48, fill: FILL.transparent, background: null },
-  { name: "icon-192", size: 192, fill: FILL.transparent, background: null },
-  { name: "icon-512", size: 512, fill: FILL.transparent, background: null },
-  { name: "apple-touch-icon", size: 180, fill: FILL.apple, background: APPLE_BG },
+  { name: "ico-16", size: 16, margin: MARGIN.ico16, background: null },
+  { name: "ico-32", size: 32, margin: MARGIN.ico32, background: null },
+  { name: "ico-48", size: 48, margin: MARGIN.ico48, background: null },
+  { name: "icon-192", size: 192, margin: MARGIN.large, background: null },
+  { name: "icon-512", size: 512, margin: MARGIN.large, background: null },
+  { name: "apple-touch-icon", size: 180, margin: MARGIN.apple, background: APPLE_BG },
 ];
 
 const CRC_TABLE = Array.from({ length: 256 }, (_, n) => {
@@ -160,11 +170,58 @@ try {
           } else px.set([0, 0, 0, 0], i);
         }
       }
+      // The WebP has faint specks scattered over its transparent background (the ones at x = 2-4 would widen the box
+      // by 32 px). Only the largest 8-connected group of pixels with any opacity, the head sticker, is kept.
+      const label = new Int32Array(crop.width * crop.height).fill(-1);
+      let keep = -1;
+      let keepSize = 0;
+      for (let start = 0, id = 0; start < label.length; start++) {
+        if (label[start] !== -1 || px[start * 4 + 3] === 0) continue;
+        const stack = [start];
+        label[start] = id;
+        let n = 0;
+        while (stack.length) {
+          const i = stack.pop()!;
+          n++;
+          const x = i % crop.width;
+          const y = (i - x) / crop.width;
+          for (let dy = -1; dy <= 1; dy++) {
+            for (let dx = -1; dx <= 1; dx++) {
+              const nx = x + dx;
+              const ny = y + dy;
+              if (nx < 0 || ny < 0 || nx >= crop.width || ny >= crop.height) continue;
+              const j = ny * crop.width + nx;
+              if (label[j] !== -1 || px[j * 4 + 3] === 0) continue;
+              label[j] = id;
+              stack.push(j);
+            }
+          }
+        }
+        if (n > keepSize) [keep, keepSize] = [id, n];
+        id++;
+      }
+      for (let i = 0; i < label.length; i++) if (label[i] !== keep) px.set([0, 0, 0, 0], i * 4);
       hctx.putImageData(data, 0, 0);
+
+      // Bounding box of every pixel with any opacity, so whisker tips and the outline's soft edge are inside it.
+      let x0 = crop.width, x1 = -1, y0 = crop.height, y1 = -1;
+      for (let y = 0; y < crop.height; y++) {
+        for (let x = 0; x < crop.width; x++) {
+          if (px[(y * crop.width + x) * 4 + 3] === 0) continue;
+          x0 = Math.min(x0, x);
+          x1 = Math.max(x1, x);
+          y0 = Math.min(y0, y);
+          y1 = Math.max(y1, y);
+        }
+      }
+      const box = document.createElement("canvas");
+      box.width = x1 - x0 + 1;
+      box.height = y1 - y0 + 1;
+      box.getContext("2d")!.drawImage(head, x0, y0, box.width, box.height, 0, 0, box.width, box.height);
 
       // Halve until close to the target so small sizes are averaged over many source pixels.
       const scaled = (w: number, h: number) => {
-        let cur: HTMLCanvasElement = head;
+        let cur: HTMLCanvasElement = box;
         while (cur.width / 2 >= w) {
           const next = document.createElement("canvas");
           next.width = Math.round(cur.width / 2);
@@ -179,9 +236,9 @@ try {
 
       const out: Record<string, number[]> = {};
       for (const job of jobs) {
-        const k = (job.size * job.fill) / Math.max(crop.width, crop.height);
-        const w = crop.width * k;
-        const h = crop.height * k;
+        const k = (job.size * (1 - 2 * job.margin)) / Math.max(box.width, box.height);
+        const w = box.width * k;
+        const h = box.height * k;
         const canvas = document.createElement("canvas");
         canvas.width = canvas.height = job.size;
         const ctx = canvas.getContext("2d")!;
@@ -193,6 +250,7 @@ try {
         ctx.drawImage(scaled(w, h), (job.size - w) / 2, (job.size - h) / 2, w, h);
         out[job.name] = Array.from(ctx.getImageData(0, 0, job.size, job.size).data);
       }
+      out.box = [x0 + crop.x, y0 + crop.y, box.width, box.height];
       return out;
     },
     { src, crop: CROP, chin: CHIN, band: BAND, jobs: JOBS },
@@ -201,6 +259,8 @@ try {
   await browser.close();
 }
 
+const [bx, by, bw, bh] = pixels.box;
+console.log(`[favicon] head bounding box in the source: x ${bx}-${bx + bw - 1}, y ${by}-${by + bh - 1} (${bw}x${bh})`);
 const png = (job: Job) => encodePng(job.size, Uint8Array.from(pixels[job.name]), job.background !== null);
 const byName = Object.fromEntries(JOBS.map((j) => [j.name, j]));
 
