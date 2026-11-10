@@ -4,7 +4,7 @@
 // and on the home page the headline line count (two lines on phones, one from 1024px; at 768px it may wrap after the comma)
 // and that no subtitle phrase wraps.
 // On pages with the skate cat (home, 404): the cat is visible and its box does not overlap any h1 or .wc-btn,
-// and when the cat image fails to load it is removed from the page.
+// and when the cat image fails to load it is removed from the page (with JavaScript) or takes no space (without).
 // On post pages (QA item in brackets):
 // - [L1] at 390, the post body is drawn with Noto Sans TC
 // - [L2] h1 / h2 / h3 line heights 1.35 / 1.4 / 1.45
@@ -206,21 +206,32 @@ try {
     await context.close();
   }
 
-  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
-  await context.route("**/ip-skate-cat.webp", (route) => route.abort());
-  const tab = await context.newPage();
-  for (const page of pages.filter((p) => p.cat)) {
-    await tab.goto(values.base + page.path, { waitUntil: "networkidle" });
-    const m = await tab.evaluate(() => ({
-      catLeft: document.querySelectorAll(".wc-ip").length,
-      scrollWidth: document.documentElement.scrollWidth,
-      innerWidth: window.innerWidth,
-    }));
-    const ok = m.catLeft === 0 && m.scrollWidth <= m.innerWidth;
-    if (!ok) failed = true;
-    console.log(`[shoot] ${ok ? "ok  " : "FAIL"} ${page.name.padEnd(13)} cat image blocked: cat elements left=${m.catLeft} scrollWidth=${m.scrollWidth}`);
+  // Cat image blocked. With JavaScript the component removes the element; without it, CSS must leave no box behind.
+  for (const javaScriptEnabled of [true, false]) {
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 }, javaScriptEnabled });
+    await context.route("**/ip-skate-cat.webp", (route) => route.abort());
+    const tab = await context.newPage();
+    for (const page of pages.filter((p) => p.cat)) {
+      await tab.goto(values.base + page.path, { waitUntil: "networkidle" });
+      const m = await tab.evaluate(() => {
+        // Layout box, not getBoundingClientRect: the rotated home cat has a non-zero bounding box even at height 0.
+        const cats = [...document.querySelectorAll<HTMLElement>(".wc-ip")].map((c) => ({ width: c.offsetWidth, height: c.offsetHeight }));
+        return {
+          catLeft: cats.length,
+          catArea: cats.reduce((sum, b) => sum + b.width * b.height, 0),
+          scrollWidth: document.documentElement.scrollWidth,
+          innerWidth: window.innerWidth,
+        };
+      });
+      const ok = (javaScriptEnabled ? m.catLeft === 0 : m.catArea === 0) && m.scrollWidth <= m.innerWidth;
+      if (!ok) failed = true;
+      console.log(
+        `[shoot] ${ok ? "ok  " : "FAIL"} ${page.name.padEnd(13)} cat image blocked, JS ${javaScriptEnabled ? "on " : "off"}: cat elements left=${m.catLeft} cat area=${m.catArea.toFixed(0)} scrollWidth=${m.scrollWidth}`,
+      );
+      if (!javaScriptEnabled) await tab.screenshot({ path: join(values.dir!, `${page.name}-390x844-nojs-cat-blocked.png`) });
+    }
+    await context.close();
   }
-  await context.close();
 } finally {
   await browser.close();
 }

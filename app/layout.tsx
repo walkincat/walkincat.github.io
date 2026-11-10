@@ -31,7 +31,8 @@ const FONT_FILES = ["/fonts/nunito-800.woff2", "/fonts/ibm-plex-mono-400.woff2"]
 
 // Adds html.wc-fonts (which switches CJK text to Noto Sans TC) after the first page load.
 // Later pages in the same session get it right away, since the font is already in the cache.
-const FONT_SCRIPT = `(function(){var d=document.documentElement,k="wc-fonts";try{if(sessionStorage.getItem(k)){d.classList.add(k);return}}catch(e){}addEventListener("load",function(){d.classList.add(k);try{sessionStorage.setItem(k,"1")}catch(e){}})})();`;
+// It also adds html.wc-js right away, which lets CSS reserve space for images that JavaScript can remove on error.
+const FONT_SCRIPT = `(function(){var d=document.documentElement,k="wc-fonts";d.classList.add("wc-js");try{if(sessionStorage.getItem(k)){d.classList.add(k);return}}catch(e){}addEventListener("load",function(){d.classList.add(k);try{sessionStorage.setItem(k,"1")}catch(e){}})})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   for (const href of FONT_FILES) {
