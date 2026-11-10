@@ -2,6 +2,8 @@
 // - Internal links (root-relative, relative, and https://walkincat.org/...) must
 //   resolve to a file in out/, and #fragments must match an id on the target page.
 // - With --external, every external http(s) link is fetched and must return < 400.
+//   Exception: links that only appear on post pages (/posts/<slug>/) come from the migrated archive
+//   (2021-2023) and some of those sites are gone. They are printed as warnings, not failures.
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 
@@ -33,6 +35,8 @@ function idsOf(file: string): Set<string> {
 }
 
 const errors: string[] = [];
+const warnings: string[] = [];
+const isPostPage = (rel: string) => /^posts\/[^/]+\/index\.html$/.test(rel);
 const external = new Map<string, string[]>();
 let internalCount = 0;
 
@@ -85,11 +89,18 @@ if (checkExternal) {
       console.warn(`[links] warning: ${href} -> 403 (host blocks automated requests; not treated as broken)`);
       continue;
     }
-    if (status === 0 || status >= 400) errors.push(`external ${href} -> ${status || "network error"} (from ${pages[0]})`);
+    if (status === 0 || status >= 400) {
+      const msg = `external ${href} -> ${status || "network error"} (from ${pages[0]})`;
+      (pages.every(isPostPage) ? warnings : errors).push(msg);
+    }
   }
 }
 
 console.log(`[links] ${internalCount} internal references checked, ${external.size} external URLs${checkExternal ? " checked" : " skipped (use --external)"}`);
+if (warnings.length) {
+  console.log(`[links] ${warnings.length} external links in post bodies did not resolve (warning only):`);
+  for (const w of warnings) console.log(`[links] warning ${w}`);
+}
 if (errors.length) {
   for (const e of errors) console.error(`[links] ${e}`);
   process.exit(1);

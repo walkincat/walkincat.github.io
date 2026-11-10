@@ -69,7 +69,15 @@ sample: true               # optional; marks the post as 範例 (sample)
 
 If `risk_note` is missing or empty, the post shows the 待補 (pending) risk block: a dashed box plus a 待補 badge. Risk text is never generated.
 
-PR1 ships one sample post only (`content/sample-stablecoin-basics.md`). `tests/fixtures/content/` adds a pending-risk post for tests and screenshots (`WC_CONTENT_DIR=tests/fixtures/content bun run build`).
+`content/` holds the 46 posts migrated from the old Hexo blog (2021–2023), with their original dates. Old URLs were `/post/<slug>.html`; the slug is unchanged, so `/post/foo.html` is now `/posts/foo/`.
+
+Images live next to the posts in `content/img/<folder>/` (WebP, at most 1200 px wide) and are referenced with relative paths. velite copies them to `/static/` at build time, so every image is served from this site. Do not link images from other sites.
+
+`tests/fixtures/content/` holds sample posts for tests and screenshots only (`WC_CONTENT_DIR=tests/fixtures/content bun run build`); they are not part of the site.
+
+## Sharing links
+
+Links shared on social media use UTM parameters: see [docs/utm.md](docs/utm.md).
 
 ## SEO rules
 
@@ -86,10 +94,10 @@ PR1 ships one sample post only (`content/sample-stablecoin-basics.md`). `tests/f
 
 ## CI
 
-`.github/workflows/ci.yml` runs on every pull request to `main`:
+`.github/workflows/ci.yml` runs on every pull request to `main` or to a `jq/**` branch:
 
 - build, typecheck and tests
-- link check
+- link check (external links that only appear in migrated post bodies are reported as warnings: some 2021–2023 sources are gone)
 - OG regeneration (size check via `scripts/png-size.ts`)
 - Playwright layout check: no horizontal scroll at 390, 360 and 1440 px widths
 - Lighthouse mobile: performance and SEO must both be ≥ 0.9

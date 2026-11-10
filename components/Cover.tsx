@@ -29,6 +29,7 @@ export function Cover({
           height={cover.height}
           alt={alt}
           loading={eager ? "eager" : "lazy"}
+          fetchPriority={eager ? "high" : undefined}
           decoding="async"
         />
       </div>

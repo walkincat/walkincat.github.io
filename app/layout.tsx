@@ -18,14 +18,22 @@ export const viewport: Viewport = {
   themeColor: "#f8f8f8",
 };
 
-const FONT_FILES = ["/fonts/noto-sans-tc.woff2", "/fonts/nunito-800.woff2", "/fonts/ibm-plex-mono-400.woff2"];
+// Noto Sans TC is not preloaded: it is applied after the load event (see FONT_SCRIPT).
+const FONT_FILES = ["/fonts/nunito-800.woff2", "/fonts/ibm-plex-mono-400.woff2"];
+
+// Adds html.wc-fonts (which switches CJK text to Noto Sans TC) after the first page load.
+// Later pages in the same session get it right away, since the font is already in the cache.
+const FONT_SCRIPT = `(function(){var d=document.documentElement,k="wc-fonts";try{if(sessionStorage.getItem(k)){d.classList.add(k);return}}catch(e){}addEventListener("load",function(){d.classList.add(k);try{sessionStorage.setItem(k,"1")}catch(e){}})})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   for (const href of FONT_FILES) {
     preload(href, { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
   }
   return (
-    <html lang="zh-Hant-TW">
+    <html lang="zh-Hant-TW" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: FONT_SCRIPT }} />
+      </head>
       <body>
         <a className="wc-skip" href="#main">
           跳到主要內容

@@ -5,7 +5,7 @@
       "url": [
         "http://localhost/",
         "http://localhost/posts/",
-        "http://localhost/posts/sample-stablecoin-basics/"
+        "http://localhost/posts/2023-June-W2/"
       ],
       "numberOfRuns": 3,
       "settings": { "formFactor": "mobile", "chromeFlags": "--no-sandbox --headless=new" }

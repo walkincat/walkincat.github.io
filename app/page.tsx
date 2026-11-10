@@ -59,7 +59,7 @@ export default function HomePage() {
             {cards.length > 0 ? (
               <div className="wc-cards">
                 {cards.map((post, i) => (
-                  <PostCard key={post.slug} post={post} index={i} />
+                  <PostCard key={post.slug} post={post} index={i} eager={i === 0} />
                 ))}
               </div>
             ) : (

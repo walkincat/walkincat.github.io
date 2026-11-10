@@ -1,17 +1,19 @@
 import { describe, expect, test } from "bun:test";
 import { readdirSync } from "node:fs";
 import { join } from "node:path";
-import { readOut } from "./helpers.js";
+import { OUT, readOut } from "./helpers.js";
 
 const CONTENT = join(import.meta.dir, "..", "content");
 
 describe("content/", () => {
   const files = readdirSync(CONTENT).filter((f) => f.endsWith(".md"));
-  test("PR1 ships exactly one fixture post, marked as sample", async () => {
-    expect(files).toEqual(["sample-stablecoin-basics.md"]);
-    const text = await Bun.file(join(CONTENT, files[0])).text();
-    expect(text).toMatch(/^sample: true$/m);
-    expect(text).toMatch(/^title: 範例｜/m);
+  test("ships the 46 migrated posts and no sample posts", async () => {
+    expect(files.length).toBe(46);
+    for (const f of files) {
+      const text = await Bun.file(join(CONTENT, f)).text();
+      expect(text).not.toMatch(/^sample: true$/m);
+      expect(text).toMatch(/^date: \d{4}-\d{2}-\d{2}$/m);
+    }
   });
 });
 
@@ -30,18 +32,36 @@ describe("home page design requirements", () => {
     const nav = html.match(/<nav class="wc-nav"[^>]*>([\s\S]*?)<\/nav>/)[1];
     expect([...nav.matchAll(/>([^<]+)<\/a>/g)].map((m) => m[1])).toEqual(["教學", "文章"]);
   });
-  test("latest articles use .wc-row__line and .wc-sample", () => {
+  test("latest articles use .wc-row__line and show no sample badge", () => {
     expect(html).toContain('class="wc-row__line"');
-    expect(html).toContain('class="wc-sample"');
+    expect(html).not.toContain('class="wc-sample"');
   });
 });
 
 describe("post page", () => {
-  const html = readOut("posts/sample-stablecoin-basics/index.html");
   test("filled risk_note renders the normal risk block with the frontmatter text", () => {
+    const html = readOut("posts/bitgin/index.html");
     expect(html).toContain('data-risk="filled"');
-    expect(html).toContain("穩定幣的錨定不是保證");
+    expect(html).toContain("OTC 或 C2C 買幣");
     expect(html).not.toContain("此篇風險說明待補");
+  });
+  test("missing risk_note renders the pending block", () => {
+    const html = readOut("posts/2023-June-W2/index.html");
+    expect(html).toContain("此篇風險說明待補");
+  });
+  test("keeps the original date", () => {
+    expect(readOut("posts/2023-June-W2/index.html")).toMatch(/<time[^>]*datetime="2023-06-10"/i);
+  });
+});
+
+describe("migrated images", () => {
+  const pages = readdirSync(join(OUT, "posts"), { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => `posts/${d.name}/index.html`);
+  test("every post page exists", () => expect(pages.length).toBe(46));
+  test.each(pages)("%s: every <img> is served from this site", (rel) => {
+    const srcs = [...readOut(rel).matchAll(/<img\b[^>]*?\ssrc="([^"]*)"/g)].map((m) => m[1]);
+    for (const src of srcs) expect(src).toMatch(/^\/(?!\/)/);
   });
 });
 

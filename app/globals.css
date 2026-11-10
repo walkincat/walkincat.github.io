@@ -36,8 +36,12 @@
   --wc-amber-500: #c77d00;
   --wc-amber-700: #8a4b00;
 
-  --wc-font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
-  --wc-font-display: "Nunito", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  /* Noto Sans TC is applied once the page has loaded (html.wc-fonts, set by the inline script in app/layout.tsx),
+     so the CJK font download does not compete with the first paint and the LCP image on slow connections. */
+  --wc-font-body: "PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", system-ui, sans-serif;
+  --wc-font-display: "Nunito", "PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", system-ui, sans-serif;
+  /* Post bodies use system CJK fonts so the self-hosted Noto Sans TC subset stays small (see scripts/subset-fonts.ts). */
+  --wc-font-prose: "PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", system-ui, sans-serif;
   --wc-font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
   --wc-space-1: 4px;
@@ -69,6 +73,10 @@
   --wc-max: 1120px;
   --wc-measure: 680px;
   --wc-gutter: 16px;
+}
+:root.wc-fonts {
+  --wc-font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --wc-font-display: "Nunito", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
 }
 
 @media (min-width: 768px) { :root { --wc-gutter: 24px; } }
@@ -215,7 +223,7 @@ a:hover { color: var(--wc-lav-800); text-decoration-thickness: 2px; }
 .wc-post__date { font-family: var(--wc-font-mono); font-size: var(--wc-fs-xs); color: var(--wc-ink-muted); }
 .wc-post__summary { margin-top: var(--wc-space-5); font-size: calc(var(--wc-fs-body) + 1px); color: var(--wc-ink-muted); line-height: 1.7; }
 .wc-post__cover { margin-top: var(--wc-space-6); }
-.wc-prose { margin-top: var(--wc-space-7); }
+.wc-prose { margin-top: var(--wc-space-7); font-family: var(--wc-font-prose); }
 .wc-prose > * + * { margin-top: var(--wc-space-4); }
 .wc-prose h2 { font-size: var(--wc-fs-h2); margin-top: var(--wc-space-7); }
 .wc-prose h3 { font-size: var(--wc-fs-h3); margin-top: var(--wc-space-6); }
