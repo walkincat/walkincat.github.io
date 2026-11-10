@@ -337,3 +337,18 @@ a:hover { color: var(--wc-lav-800); text-decoration-thickness: 2px; }
 
 /* Markdown blockquote inside posts. */
 .wc-prose blockquote { margin: 0; padding: var(--wc-space-3) var(--wc-space-4); border-left: 4px solid var(--wc-lav-300); background: var(--wc-surface); border-radius: 0 var(--wc-radius-sm) var(--wc-radius-sm) 0; }
+
+/* Skate cat (§15). Home: bottom-right corner on desktop, peeking in from the right edge on narrower screens.
+   No z-index on .wc-hero__inner: it would break the logo's mix-blend-mode. */
+.wc-hero--ip { position: relative; overflow: clip; }
+.wc-hero__ip { position: absolute; right: -36px; bottom: var(--wc-space-3); width: 96px; height: auto; transform: rotate(-8deg); pointer-events: none; }
+@media (min-width: 1200px) { .wc-hero__ip { right: max(var(--wc-gutter), calc((100% - 1200px) / 2)); bottom: var(--wc-space-5); width: 200px; transform: none; } }
+
+/* 404 page. */
+.wc-404 { padding: var(--wc-space-7) var(--wc-gutter) var(--wc-space-8); }
+.wc-404__inner { display: grid; justify-items: center; text-align: center; max-width: 28em; margin-inline: auto; }
+.wc-404__cat { width: 210px; height: auto; aspect-ratio: 560 / 791; }
+.wc-404__title { margin-top: var(--wc-space-6); font-size: var(--wc-fs-h1); word-break: keep-all; overflow-wrap: anywhere; }
+.wc-404__lead { margin-top: var(--wc-space-4); color: var(--wc-ink-muted); line-height: 1.75; }
+.wc-404__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--wc-space-3); margin-top: var(--wc-space-6); }
+@media (min-width: 768px) { .wc-404__cat { width: 280px; } }

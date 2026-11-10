@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowIcon } from "@/components/icons";
 import { EmptyState } from "@/components/EmptyState";
+import { IpCat } from "@/components/IpCat";
 import { PostCard } from "@/components/PostCard";
 import { PostRow } from "@/components/PostRow";
 import { posts } from "@/lib/posts";
@@ -20,7 +21,8 @@ export default function HomePage() {
   return (
     <>
       <div className="wc12-home">
-        <section className="wc-hero" aria-labelledby="hero-line">
+        <section className="wc-hero wc-hero--ip" aria-labelledby="hero-line">
+          <IpCat className="wc-hero__ip" />
           <div className="wc-hero__inner">
             <img
               className="wc-hero__logo"

@@ -79,6 +79,10 @@ Images live next to the posts in `content/img/<folder>/` (WebP, at most 1200 px 
 
 `tests/fixtures/content/` holds sample posts for tests and screenshots only (`WC_CONTENT_DIR=tests/fixtures/content bun run build`); they are not part of the site.
 
+## Skate cat (墨鏡直排輪貓)
+
+`public/ip-skate-cat.webp` (560×791, from the 785×1108 PNG of the 2023 brand CI) is decoration on the home hero (bottom-right corner on desktop, peeking in from the right edge below 1200 px) and on the 404 page. It is rendered by `components/IpCat.tsx` with `alt=""` and `aria-hidden="true"`; if the image fails to load, the component removes it. If the cat is made larger or moved, re-run `scripts/shoot.ts`: it fails when the cat overlaps the headline or a button.
+
 ## Sharing links
 
 Links shared on social media use UTM parameters: see [docs/utm.md](docs/utm.md).
@@ -87,7 +91,7 @@ Links shared on social media use UTM parameters: see [docs/utm.md](docs/utm.md).
 
 - Canonical form: `https://walkincat.org/path/` (https, apex domain, trailing slash). The home page is `https://walkincat.org/`.
 - The sitemap `<loc>` values are exactly the canonical strings. `tests/seo.test.js` checks every one.
-- The 404 page has `noindex` and no canonical.
+- The 404 page has `noindex` and no canonical, and is not in the sitemap (`tests/ip.test.js`).
 - `/news/` is a reserved placeholder: `noindex`, left out of the sitemap and the navigation.
 - No-slash URLs get a 308 to the slash form. This is Cloudflare Pages' default behaviour, so no `_redirects` file is needed.
 - http to https and www to apex redirects are zone settings in Cloudflare, not part of this repository.
@@ -103,5 +107,5 @@ Links shared on social media use UTM parameters: see [docs/utm.md](docs/utm.md).
 - build, typecheck and tests
 - link check (external links that only appear in migrated post bodies are reported as warnings: some 2021–2023 sources are gone)
 - OG regeneration (size check via `scripts/png-size.ts`)
-- Playwright layout check: no horizontal scroll at 390, 360 and 1440 px widths
+- Playwright layout check (`scripts/shoot.ts`): no horizontal scroll at 320, 360, 390 and 1440 px widths on the home page, the 404 page and the post pages; on the home and 404 pages the skate cat is visible, does not overlap the `h1` or any button, and is removed when its image fails to load
 - Lighthouse mobile: performance and SEO must both be ≥ 0.9
