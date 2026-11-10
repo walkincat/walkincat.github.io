@@ -69,7 +69,7 @@ sample: true               # optional; marks the post as 範例 (sample)
 ---
 ```
 
-If `risk_note` is missing or empty, the post page shows the shared plain-language "非投資建議" block (`components/NotAdviceNote.tsx`, one fixed sentence for every such post), and post lists show the 風險說明待補 badge. Article-specific risk text is never generated.
+If `risk_note` is missing or empty, the post page shows the shared plain-language "非投資建議" block (`components/NotAdviceNote.tsx`, one fixed sentence for every such post) Post lists show no risk badge. Article-specific risk text is never generated.
 
 `content/` holds the 46 posts migrated from the old Hexo blog (2021–2023), with their original dates. Old URLs were `/post/<slug>.html`; the slug is unchanged, so `/post/foo.html` is now `/posts/foo/`.
 

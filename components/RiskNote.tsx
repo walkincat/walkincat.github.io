@@ -22,12 +22,3 @@ export function RiskNote({ items }: { items: readonly string[] }) {
     </section>
   );
 }
-
-export function PendingBadge() {
-  return (
-    <span className="wc-badge wc-badge--pending">
-      <WarningIcon />
-      風險說明待補
-    </span>
-  );
-}

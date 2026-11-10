@@ -140,12 +140,9 @@ a:hover { color: var(--wc-lav-800); text-decoration-thickness: 2px; }
 .wc-btn svg { width: 18px; height: 18px; }
 
 /* Badges */
-.wc-badges { display: flex; flex-wrap: wrap; gap: var(--wc-space-2); align-items: center; }
 .wc-badge { display: inline-flex; align-items: center; gap: var(--wc-space-1); padding: 2px var(--wc-space-2); border-radius: var(--wc-radius-sm); font-size: var(--wc-fs-xs); font-weight: 500; line-height: 1.5; white-space: nowrap; }
 .wc-badge--sample { background: var(--wc-lav-100); color: var(--wc-lav-700); }
 .wc-badge--topic { background: var(--wc-surface); color: var(--wc-ink); border: 1px solid var(--wc-line); }
-.wc-badge--pending { background: var(--wc-amber-100); color: var(--wc-amber-700); border: 1px solid var(--wc-amber-500); }
-.wc-badge svg { width: 14px; height: 14px; flex: none; }
 
 /* Hero */
 .wc-hero { min-height: 100svh; display: grid; place-items: center; text-align: center; padding: var(--wc-space-7) var(--wc-gutter); background:

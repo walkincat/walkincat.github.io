@@ -58,6 +58,24 @@ describe("post page", () => {
 const emptyRisk = (text) => /^risk_note: \[\]$/m.test(text) || !/^risk_note:/m.test(text);
 const postFiles = readdirSync(CONTENT).filter((f) => f.endsWith(".md"));
 
+describe("post lists show no 待補 badge", () => {
+  const walk = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(join(dir, e.name)) : [join(dir, e.name)]));
+  // Every built page that lists posts (cards or rows), e.g. / and /posts/.
+  const listPages = walk(OUT)
+    .filter((f) => f.endsWith(".html"))
+    .filter((f) => /class="wc-(card|row)"/.test(readFileSync(f, "utf8")));
+  test("the home page and /posts/ are among the list pages", () => {
+    const rels = listPages.map((f) => f.slice(OUT.length + 1));
+    expect(rels).toContain("index.html");
+    expect(rels).toContain("posts/index.html");
+  });
+  test.each(listPages.map((f) => [f.slice(OUT.length + 1), f]))("%s has no 待補", (_rel, f) => {
+    const html = readFileSync(f, "utf8");
+    expect(html).not.toContain("待補");
+    expect(html).not.toContain("wc-badge--pending");
+  });
+});
+
 describe("not-advice block shows exactly when risk_note is empty", () => {
   const rows = postFiles.map((f) => {
     const slug = f.replace(/\.md$/, "");
