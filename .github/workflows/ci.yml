@@ -9,6 +9,8 @@ permissions:
   contents: read
 
 jobs:
+  # Playwright and Lighthouse need Chromium system libraries installed with sudo apt;
+  # the lab public runner has no sudo and lacks them, so this job stays on GitHub-hosted.
   build-test:
     runs-on: ubuntu-latest
     timeout-minutes: 20
